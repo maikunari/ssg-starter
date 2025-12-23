@@ -3,6 +3,9 @@ backend:
   branch: main
 
 local_backend: true
+
+# For production deployment, set:
+# local_backend: false
 # Logo for the CMS interface - update this URL to your deployed site's logo
 logo_url: https://yourdomain.com/assets/images/logo-color.png # Update with your logo URL
 
@@ -27,8 +30,8 @@ collections:
         name: "author"
         widget: "select"
         options:
-          - {label: "Tom Maplewood", value: "tom-maplewood"}
-          - {label: "Sarah Maplewood", value: "sarah-maplewood"}
+          - {label: "Author One", value: "author-one"}
+          - {label: "Author Two", value: "author-two"}
       - {label: "Publish Date", name: "date", widget: "datetime"}
       - {label: "Tags", name: "tags", widget: "list", default: ["post"]}
       - {label: "Featured Image", name: "image", widget: "image", hint: "Upload image - it will be automatically named based on Page Name"}

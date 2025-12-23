@@ -538,6 +538,64 @@ Security headers are configured in `netlify.toml`:
 - **Issues:** Report bugs on GitHub repository
 - **Community:** Check Eleventy Discord community
 
+## Critical Template Files
+
+Understanding these files will help you avoid common issues:
+
+### Blog Configuration Files
+
+**`src/blog/blog.json`** - CRITICAL for blog functionality
+```json
+{
+  "layout": "blog-post.html",
+  "tags": "post"
+}
+```
+This Eleventy directory data file applies the blog-post layout to ALL markdown files in the blog directory. **Without this file, blog posts will render without layout/styling.**
+
+**Why it's needed:**
+- Sets the default layout for all blog posts
+- Automatically tags all posts with "post" for the collections.post array
+- Enables blog posts to work without individual frontmatter layout declarations
+
+### Blog Pagination
+
+The blog listing page (`src/pages/blog.html`) uses Eleventy pagination:
+- **With posts:** Generates blog/index.html with paginated posts
+- **Empty blog:** Pagination still generates the first page so Blog link appears in navigation
+- Uses `alias: posts` to make paginated items available in the template
+
+### Template Engine Settings
+
+**`.eleventy.js` configuration:**
+```javascript
+{
+  htmlTemplateEngine: 'njk',  // HTML files use Nunjucks
+  // markdownTemplateEngine: NOT set - uses Liquid (default)
+}
+```
+
+**Why Liquid for markdown:**
+- Liquid is more forgiving with special characters (like `/admin`)
+- Nunjucks tries to parse certain characters as template variables
+- Liquid markdown can successfully use Nunjucks layouts
+- **DO NOT** set `markdownTemplateEngine: 'njk'` - it will break blog posts
+
+### Default Content
+
+The template includes a default "Welcome to Your New Blog" post:
+- **File:** `src/blog/welcome-to-your-new-blog.md`
+- **Purpose:** Shows blog functionality working immediately
+- **Featured image:** `src/assets/images/blog/welcome-to-your-new-blog.jpg`
+- **Action:** Users can edit or delete this post and create their own
+
+### Placeholder Author Images
+
+- **author-one.jpg** - Placeholder for first author
+- **author-two.jpg** - Placeholder for second author
+- **Location:** `src/assets/images/authors/`
+- Replace these with actual author photos after setup
+
 ## Next Steps
 
 After completing this guide:

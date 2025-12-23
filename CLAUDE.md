@@ -259,6 +259,15 @@ body: Markdown content
 
 **Important**: Images are automatically named based on `pageName` field
 
+**Blog Directory Data** (`src/blog/blog.json`):
+```json
+{
+  "layout": "blog-post.html",
+  "tags": "post"
+}
+```
+This **critical file** applies default layout and tags to ALL blog posts. Without it, blog posts won't render with proper layout.
+
 ### Eleventy Configuration (.eleventy.js)
 **Key Features**:
 - Navigation plugin: `@11ty/eleventy-navigation`
