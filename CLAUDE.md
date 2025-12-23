@@ -4,8 +4,9 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-**Starter Kit Hearth** is an Eleventy-based static site generator for business websites with:
+**SSG-Starter** is an Eleventy-based static site generator template for business websites with:
 - Theme-aware SCSS architecture (7 pre-built themes)
+- Interactive setup wizard for quick configuration
 - GSAP scroll animations with native View Transitions API
 - Decap CMS for blog management
 - Responsive image optimization via @11ty/eleventy-img
@@ -13,7 +14,65 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 **Tech Stack**: Eleventy 3.x, Sass, PostCSS/Autoprefixer, esbuild, GSAP, View Transitions API, Decap CMS
 
+## Template Setup
+
+**IMPORTANT**: This is a **template repository**. When using SSG-Starter to create a new site:
+
+1. **Use as GitHub Template** (recommended):
+   - Click "Use this template" button on GitHub
+   - Clone your new repository
+   - Run `npm install`
+   - Run `npm run setup` (interactive configuration wizard)
+
+2. **Manual Setup**:
+   - Clone this repository
+   - Run `npm install`
+   - Run `npm run setup` to configure business info, authors, theme, etc.
+
+See [QUICK_START.md](./QUICK_START.md) for complete setup instructions.
+
+### Setup Script Reference
+
+The `npm run setup` command runs an interactive wizard that configures:
+
+- Business information (name, contact, address, hours, services)
+- Author profiles (names, titles, bios)
+- Theme selection (from 7 pre-built themes)
+- Repository settings (Git URL, branch)
+
+**Files automatically updated by setup script**:
+- `src/_data/client.json` - Business data
+- `src/_data/authors.json` - Author information
+- `src/assets/css/abstracts/_schemes.scss` - Active theme
+- `src/admin/config.yml` - CMS configuration
+- `package.json` - Repository metadata
+
+**Manual steps after setup**:
+- Add author photos to `src/assets/images/authors/`
+- Add logo files to `src/assets/images/`
+- Update favicons in `src/assets/favicons/`
+- Add social sharing image `src/assets/images/social.jpg`
+
+### Template vs. Client Site Workflows
+
+**Template Development** (this repository):
+- Work on improving the template itself
+- Keep placeholder data in place
+- Test with multiple themes
+- Ensure setup script works correctly
+
+**Client Site Development** (after running setup):
+- Replace all placeholder content with real data
+- Add client-specific assets (images, logos)
+- Customize pages and content
+- Deploy to production
+
 ## Essential Commands
+
+### Setup
+```bash
+npm run setup            # Run interactive setup wizard to configure site
+```
 
 ### Development
 ```bash
