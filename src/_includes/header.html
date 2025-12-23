@@ -1,0 +1,34 @@
+<!-- ============================================ -->
+<!--                 Navigation                   -->
+<!-- ============================================ -->
+{% set navPages = collections.all | eleventyNavigation %}
+
+<header class="navigation">
+    <div class="navigation__background"></div>
+    <div class="navigation__container">
+        <!--Logo - Image logo for Maplewood Hearth & Home-->
+        <a class="navigation__logo" aria-label="click to go to home page" href="/">
+            {% image './src/assets/images/logo-light.png', 'Maplewood Hearth & Home Logo', 'logo--light', 'eager', '300px' %}
+            {% image './src/assets/images/logo-color.png', 'Maplewood Hearth & Home Logo', 'logo--dark', 'eager', '300px' %}
+        </a>
+
+        <!--Mobile Nav toggle-->
+        <button class="navigation__hamburger" aria-expanded="false" aria-controls="navigation-menu">
+            <span class="visually-hidden">Menu</span>
+            <span aria-hidden="true"></span>
+        </button>
+
+        <!--Main Nav-->
+        <nav class="navigation__menu" id="navigation-menu" aria-label="main navigation">
+            <ul class="navigation__list">
+                {%- for entry in navPages %}
+                    <li class="navigation__item">
+                        <a class="navigation__link{% if entry.url == page.url %} navigation__link--active{% endif %}" href="{{ entry.url }}">
+                            {{ entry.title }}
+                        </a>
+                    </li>
+                {%- endfor %}
+            </ul>
+        </nav>
+    </div>
+</header>

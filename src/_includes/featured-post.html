@@ -1,0 +1,20 @@
+<div class="sidebar">
+  <!--Featured Posts Section-->
+  <div class="sidebar__section">
+    <h2 class="sidebar__title">Featured Posts</h2>
+    <ul class="sidebar__featured-list">
+      {%- for post in collections.featured | reverse -%}
+      <li>
+        <a class="sidebar__featured-item" href="{{ post.url }}">
+          {% image './src/assets/images/blog/' + post.data.pageName + '.jpg', post.data.imageAlt, 'sidebar__featured-image', 'lazy', '60px'%}
+          <div class="sidebar__featured-content">
+            <h3 class="sidebar__featured-title">{{ post.data.postTitle }}</h3>
+            <span class="sidebar__featured-date">{{ post.date | postDate }}</span>
+          </div>
+        </a>
+      </li>
+      {%- endfor -%}
+    </ul>
+  </div>
+  <!--Add anything else in the sidebar below-->
+</div>

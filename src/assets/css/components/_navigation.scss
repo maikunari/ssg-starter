@@ -1,0 +1,417 @@
+// =============================================================================
+// NAVIGATION COMPONENT
+// =============================================================================
+
+@use '../abstracts/variables' as vars;
+@use '../abstracts/mixins' as mix;
+@use '../abstracts/schemes' as schemes;
+
+.navigation {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: auto;
+  z-index: vars.$z-navigation-mobile;
+  
+  @include mix.desktop-up {
+    height: 6.25rem;
+    z-index: vars.$z-navigation;
+    @include mix.flex-center;
+  }
+  
+  // Background
+  &__background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: vars.$body-bg-color;
+    width: 100%;
+    height: 100%;
+    box-shadow: vars.$shadow-sm;
+    z-index: -1;
+    
+    @include mix.desktop-up {
+      height: 0;
+      transition: height vars.$transition-base;
+      box-shadow: none;
+    }
+  }
+  
+  // Scrolled state
+  &--scrolled {
+    .navigation__background {
+      @include mix.desktop-up {
+        height: 100%;
+        box-shadow: vars.$shadow;
+      }
+    }
+    
+    .navigation__logo {
+      .logo--light {
+        display: none;
+      }
+      
+      .logo--dark {
+        display: block;
+      }
+    }
+    
+    .navigation__logo-sub {
+      @include mix.desktop-up {
+        color: vars.$header-color;
+      }
+    }
+    
+    .navigation__link {
+      @include mix.desktop-up {
+        color: vars.$header-color;
+      }
+
+      // Override global link styles for scrolled state
+      &:hover {
+        @include mix.desktop-up {
+          color: vars.$header-color;
+          text-decoration: none;
+        }
+      }
+    }
+  }
+
+
+  // Container
+  &__container {
+    padding: 0.8125rem 0;
+    width: 96%;
+    margin: 0 auto;
+    
+    @include mix.desktop-up {
+      max-width: 75rem;
+      @include mix.flex-between;
+      padding: 0;
+    }
+  }
+  
+  // Logo
+  &__logo {
+    display: inline-block;
+    height: 1.875rem;
+    width: auto;
+    text-decoration: none;
+    
+    @include mix.desktop-up {
+      margin-right: auto;
+      height: 3.75rem;
+    }
+    
+    img {
+      width: auto;
+      height: 100%;
+    }
+    
+    .logo--light {
+      display: none;
+      
+      @include mix.desktop-up {
+        display: block;
+      }
+    }
+    
+    .logo--dark {
+      display: block;
+      
+      @include mix.desktop-up {
+        display: none;
+      }
+    }
+  }
+  
+  // Text logo styling
+  &__logo-text {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  &__logo-main {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: vars.$primary;
+    line-height: 1;
+    font-family: 'Georgia', serif;
+    
+    @include mix.desktop-up {
+      font-size: 1.75rem;
+    }
+  }
+  
+  &__logo-sub {
+    font-size: 0.625rem;
+    font-weight: 400;
+    color: vars.$header-color;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-top: 0.125rem;
+    
+    @include mix.desktop-up {
+      font-size: 0.75rem;
+      color: vars.$body-text-color-white;
+    }
+  }
+  
+  // Mobile hamburger menu
+  &__hamburger {
+    @include mix.button-reset;
+    position: absolute;
+    right: 0;
+    height: 3rem;
+    width: 3rem;
+    z-index: 100;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: top vars.$transition-base;
+    
+    @include mix.desktop-up {
+      display: none;
+    }
+    
+    span {
+      height: 2px;
+      width: 1.875rem;
+      background-color: schemes.color(header-color);
+      display: block;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      transition: background-color vars.$transition-base;
+      
+      &::before,
+      &::after {
+        content: '';
+        position: absolute;
+        display: block;
+        height: 2px;
+        width: 80%;
+        background: schemes.color(header-color);
+        opacity: 1;
+        left: 0;
+        transition: width vars.$transition-base, left vars.$transition-base, 
+                   top vars.$transition-base, transform vars.$transition-slow;
+      }
+      
+      &::before {
+        top: -6px;
+      }
+      
+      &::after {
+        top: 6px;
+      }
+    }
+    
+    // Clicked state
+    &--active {
+      span {
+        background-color: transparent;
+        
+        &::before {
+          width: 100%;
+          transform: translate(-50%, -50%) rotate(225deg);
+          left: 50%;
+          top: 50%;
+        }
+        
+        &::after {
+          width: 100%;
+          transform: translate(-50%, -50%) rotate(-225deg);
+          left: 50%;
+          top: 50%;
+        }
+      }
+    }
+  }
+  
+  // Mobile menu
+  &__menu {
+    position: fixed;
+    right: 0;
+    padding: 0;
+    width: 100%;
+    border-radius: 0 0 0.375em 0.375em;
+    z-index: -1;
+    overflow: hidden;
+    box-shadow: vars.$shadow-sm;
+    background-color: vars.$body-bg-color;
+    top: 3.7rem;
+    padding-top: 0;
+    height: 0;
+    transition: height vars.$transition-base, padding-top vars.$transition-base, 
+               top vars.$transition-base;
+    
+    @include mix.desktop-up {
+      position: static;
+      height: auto;
+      background: transparent;
+      box-shadow: none;
+      border-radius: 0;
+      overflow: visible;
+      z-index: auto;
+      padding: 0;
+      top: auto;
+    }
+    
+    // Open state
+    &--open {
+      height: 29rem;
+      padding-top: 5rem;
+      padding-bottom: 5rem;
+      z-index: -100;
+      
+      .navigation__item {
+        opacity: 1;
+        transform: translateY(0) rotateX(0);
+      }
+    }
+    
+    ul {
+      padding: 0;
+      perspective: 700px;
+      
+      @include mix.desktop-up {
+        @include mix.flex-center;
+        justify-content: flex-end;
+        perspective: none;
+      }
+    }
+  }
+  
+  // Menu items
+  &__item {
+    list-style: none;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    transform-style: preserve-3d;
+    opacity: 0;
+    transform: translateY(-0.4375rem) rotateX(90deg);
+    transition: opacity vars.$transition-slow, transform vars.$transition-slow;
+    
+    @include mix.desktop-up {
+      margin: 0 0 0 1.875rem;
+      padding-top: 0.1875rem;
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+    
+    // Staggered animation delays
+    @for $i from 1 through 7 {
+      &:nth-of-type(#{$i}) {
+        transition-delay: #{$i * 0.01}s;
+      }
+    }
+  }
+  
+  // Menu links
+  &__link {
+    text-decoration: none;
+    text-transform: uppercase;
+    color: schemes.color(header-color);
+    font-size: 1.1875rem;
+    text-align: center;
+    display: inline-block;
+    position: relative;
+    font-weight: bold;
+    
+    @include mix.desktop-up {
+      font-size: clamp(0.875rem, 1.5vw, 1.125rem);
+      color: vars.$body-text-color-white;
+      transition: color vars.$transition-base;
+    }
+
+    // Override global link styles
+    &:hover {
+      color: schemes.color(header-color); // Keep mobile color on hover
+      text-decoration: none;
+      
+      @include mix.desktop-up {
+        color: vars.$body-text-color-white; // Keep desktop color on hover
+      }
+    }
+    
+    // Active/hover underline
+    &::before {
+      content: '';
+      position: absolute;
+      display: block;
+      height: 0.5rem;
+      background: vars.$primary;
+      opacity: 0;
+      border-radius: 0.25rem;
+      left: -0.375rem;
+      right: -0.375rem;
+      bottom: 0;
+      z-index: -1;
+
+      @include mix.desktop-up {
+        height: 0.375rem;
+        border-radius: 0.1875rem;
+        bottom: 0.125rem;
+        left: 0;
+        right: auto;
+        width: 0%;
+        opacity: 1;
+        transition: width vars.$transition-base;
+      }
+    }
+
+    // Mobile active state
+    &--active::before {
+      opacity: 1;
+
+      @include mix.desktop-up {
+        width: 100%;
+        bottom: 0.125rem;
+      }
+    }
+    
+    // Desktop hover state
+    @include mix.desktop-up {
+      &:hover::before {
+        width: 100%;
+      }
+    }
+  }
+}
+
+// Body scroll state (when body has .scroll class)
+body.scroll .navigation {
+  .navigation__background {
+    @include mix.desktop-up {
+      height: 100%;
+      box-shadow: vars.$shadow;
+    }
+  }
+  
+  .navigation__logo {
+    .logo--light {
+      display: none !important;
+    }
+    
+    .logo--dark {
+      display: block !important;
+    }
+  }
+  
+  .navigation__link {
+    @include mix.desktop-up {
+      color: vars.$header-color;
+    }
+
+    // Override global link styles for body scroll state
+    &:hover {
+      @include mix.desktop-up {
+        color: vars.$header-color;
+        text-decoration: none;
+      }
+    }
+  }
+}

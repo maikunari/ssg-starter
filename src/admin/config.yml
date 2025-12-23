@@ -1,0 +1,36 @@
+backend:
+  name: git-gateway
+  branch: main
+
+local_backend: true
+# Logo for the CMS interface - update this URL to your deployed site's logo
+logo_url: https://yourdomain.com/assets/images/logo-color.png # Update with your logo URL
+
+media_folder: "src/assets/images/blog"
+public_folder: "/images/blog"
+
+collections:
+  - name: "blog"
+    label: "Blog"
+    label_singular: "Post"
+    folder: "src/blog"
+    create: true
+    slug: "{{pageName}}"
+    summary: "{{postTitle}}"
+    fields:
+      - {label: "Page Slug", name: "pageName", widget: "string", hint: "Used for the URL and image filename (no spaces, use dashes)"}
+      - {label: "Post Title", name: "postTitle", widget: "string", hint: "Main heading shown on the page"}
+      - {label: "SEO Title", name: "seoTitle", widget: "string", hint: "Title shown in Google search results"}
+      - {label: "Excerpt", name: "excerpt", widget: "text", hint: "Short summary for blog listing page"}
+      - {label: "Meta Description", name: "metaDescription", widget: "text", hint: "Description shown in Google search results", required: false}
+      - label: "Author"
+        name: "author"
+        widget: "select"
+        options:
+          - {label: "Tom Maplewood", value: "tom-maplewood"}
+          - {label: "Sarah Maplewood", value: "sarah-maplewood"}
+      - {label: "Publish Date", name: "date", widget: "datetime"}
+      - {label: "Tags", name: "tags", widget: "list", default: ["post"]}
+      - {label: "Featured Image", name: "image", widget: "image", hint: "Upload image - it will be automatically named based on Page Name"}
+      - {label: "Image Alt Text", name: "imageAlt", widget: "string"}
+      - {label: "Body", name: "body", widget: "markdown"}

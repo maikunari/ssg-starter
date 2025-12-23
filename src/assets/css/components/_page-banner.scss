@@ -1,0 +1,118 @@
+/*-- -------------------------- -->
+<---        Page Banner         -->
+<--- -------------------------- -*/
+
+/* Mobile - 360px */
+@media only screen and (min-width: 0rem) {
+  .page-banner {
+    position: relative;
+    z-index: 1;
+    min-height: 20rem;
+    padding: calc(80rem / 16) calc(16rem / 16) calc(40rem / 16) calc(16rem / 16);
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    overflow: hidden;
+
+    &__container {
+      width: 100%;
+      max-width: calc(1280rem / 16);
+      margin: auto;
+      position: relative;
+      z-index: 10;
+      text-align: center;
+    }
+
+    &__title {
+      font-size: clamp(2.4375rem, 4vw, 3.8125rem);
+      font-weight: 900;
+      line-height: 1.2em;
+      text-align: center;
+      max-width: calc(700rem / 16);
+      margin: 0 auto calc(20rem / 16) auto;
+      color: var(--bodyTextColorWhite);
+      position: relative;
+    }
+
+    &__meta {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: calc(12rem / 16);
+      margin-top: calc(20rem / 16);
+      font-size: calc(18rem / 16);
+      color: var(--primary);
+      font-weight: 700;
+    }
+
+    &__author-image {
+      width: calc(40rem / 16);
+      height: calc(40rem / 16);
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid var(--primary);
+    }
+
+    &__author {
+      font-size: calc(16rem / 16);
+      font-weight: 600;
+      color: var(--bodyTextColorWhite);
+    }
+
+    &__date {
+      font-size: calc(16rem / 16);
+      color: var(--bodyTextColorWhite);
+      opacity: 0.8;
+    }
+
+    &__background {
+      width: 100%;
+      height: 100%;
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: -2;
+
+      &:before {
+        /* Overlay */
+        content: '';
+        width: 100%;
+        height: 100%;
+        background: #000;
+        opacity: 0.75;
+        position: absolute;
+        display: block;
+        top: 0;
+        left: 0;
+        z-index: 1;
+        pointer-events: none;
+      }
+
+      img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+      }
+    }
+  }
+}
+
+/* Tablet - 768px */
+@media only screen and (min-width: 48rem) {
+  .page-banner {
+    min-height: 24rem;
+    padding: calc(100rem / 16) calc(40rem / 16) calc(60rem / 16) calc(40rem / 16);
+  }
+}
+
+/* Large Desktop - 1300px */
+@media only screen and (min-width: 81.25rem) {
+  .page-banner {
+    min-height: 28rem;
+    padding: calc(120rem / 16) calc(40rem / 16) calc(80rem / 16) calc(40rem / 16);
+  }
+} 

@@ -1,0 +1,160 @@
+// =============================================================================
+// RESET & BASE STYLES
+// =============================================================================
+
+@use '../abstracts/variables' as vars;
+@use '../abstracts/schemes' as schemes;
+
+// CSS Custom Properties
+// -----------------------------------------------------------------------------
+:root {
+  --primary: #{vars.$primary};
+  --primaryShade: #{vars.$primary-shade};
+  --primaryDark: #{vars.$primary-dark};
+  --primaryLight: #{vars.$primary-light};
+  --bodyTextColor: #{vars.$body-text-color};
+  --bodyTextColorWhite: #{vars.$body-text-color-white};
+  --headerColor: #{vars.$header-color};
+  --borderColor: #{vars.$border-color};
+  --borderColorSubtle: #{vars.$border-color-subtle};
+  --accent: #{vars.$accent};
+  --dark: #{vars.$dark};
+  --medium: #{vars.$medium};
+  
+  /* Typography scale */
+  --topperFontSize: clamp(0.8125rem, 1.6vw, 1rem);
+  --headerFontSize: clamp(1.9375rem, 4.5vw, 3.0625rem);
+  --bodyFontSize: clamp(1rem, 1.2vw, 1.125rem);
+  
+  /* Spacing */
+  --sectionPadding: clamp(3.75em, 7.82vw, 6.25em) 1rem;
+
+  /* Spacing scale */
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 2rem;
+  --space-xl: 4rem;
+
+  /* Border radius */
+  --radius-sm: 0.25rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 1rem;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+}
+
+// Font faces
+// -----------------------------------------------------------------------------
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local(''),
+       url('../fonts/roboto-v29-latin-regular.woff2') format('woff2'),
+       url('../fonts/roboto-v29-latin-regular.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: local(''),
+       url('../fonts/roboto-v29-latin-700.woff2') format('woff2'),
+       url('../fonts/roboto-v29-latin-700.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+  src: local(''),
+       url('../fonts/roboto-v29-latin-900.woff2') format('woff2'),
+       url('../fonts/roboto-v29-latin-900.woff') format('woff');
+}
+
+// Reset
+// -----------------------------------------------------------------------------
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 100%;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Roboto', Arial, sans-serif;
+  color: vars.$body-text-color;
+  background-color: vars.$body-bg-color;
+  overflow-x: hidden;
+  transition: background-color 0.3s;
+}
+
+// Typography
+// -----------------------------------------------------------------------------
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+  color: vars.$header-color;
+}
+
+p, li, a {
+  font-size: 1.125rem;
+  line-height: 1.5em;
+  margin: 0;
+}
+
+p, li {
+  color: #575757;
+}
+
+a {
+  text-decoration: none;
+  color: schemes.color(primary-dark);
+  transition: all 0.3s ease;
+  
+  &:hover {
+    cursor: pointer;
+    color: schemes.color(primary);
+    text-decoration: none;
+  }
+}
+
+// Interactive elements
+// -----------------------------------------------------------------------------
+button:hover {
+  cursor: pointer;
+}
+
+// Accessibility
+// -----------------------------------------------------------------------------
+.skip {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  z-index: -1111111;
+}
+
+// Responsive scaling
+// -----------------------------------------------------------------------------
+@media only screen and (min-width: 2000px) {
+  body,
+  html {
+    font-size: 0.85vw;
+  }
+}
+
+// Custom scrollbar styling removed - using default browser scrollbar 

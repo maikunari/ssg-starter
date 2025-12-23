@@ -1,0 +1,181 @@
+// imports for the various eleventy plugins (navigation & image)
+const eleventyNavigationPlugin = require('@11ty/eleventy-navigation');
+const { DateTime } = require('luxon');
+const Image = require('@11ty/eleventy-img');
+const path = require('path');
+
+// allows the use of {% image... %} to create responsive, optimised images
+async function imageShortcode(src, alt, className, loading = 'lazy', sizes = '(max-width: 600px) 300px, (max-width: 1200px) 600px, 1200px') {
+  // don't pass an alt? chuck it out. passing an empty string is okay though
+  if (alt === undefined) {
+    throw new Error(`Missing \`alt\` on responsiveimage from: ${src}`);
+  }
+
+  // create the metadata for an optimised image
+  let metadata = await Image(`${src}`, {
+    widths: [300, 600, 1200],
+    formats: ['avif', 'webp', 'jpeg'],
+    urlPath: '/images/',
+    outputDir: './public/images/',
+    filenameFormat: function (id, src, width, format, options) {
+      const extension = path.extname(src);
+      const name = path.basename(src, extension);
+      return `${name}-${width}w.${format}`;
+    },
+  });
+
+  // get the smallest and biggest image for picture/image attributes
+  let lowsrc = metadata.jpeg[0];
+  let highsrc = metadata.jpeg[metadata.jpeg.length - 1];
+
+  // when {% image ... %} is used, this is what's returned
+  return `<picture class="${className || ''}">
+    ${Object.values(metadata)
+      .map((imageFormat) => {
+        return `  <source type="${imageFormat[0].sourceType}" srcset="${imageFormat
+          .map((entry) => entry.srcset)
+          .join(', ')}" sizes="${sizes}">`;
+      })
+      .join('\n')}
+      <img
+        src="${lowsrc.url}"
+        width="${highsrc.width}"
+        height="${highsrc.height}"
+        alt="${alt}"
+        loading="${loading}"
+        decoding="async">
+    </picture>`;
+}
+
+module.exports = function (eleventyConfig) {
+  // Adds the navigation plugin for easy navs
+  eleventyConfig.addPlugin(eleventyNavigationPlugin);
+
+  // Allows css, assets, robots.txt, and CMS config files to be passed into /public
+  eleventyConfig.addPassthroughCopy('./src/css/**/*.css');
+  eleventyConfig.addPassthroughCopy('./src/assets');
+  eleventyConfig.addPassthroughCopy('./src/admin');
+  eleventyConfig.addPassthroughCopy('./src/_redirects');
+  eleventyConfig.addPassthroughCopy({ './src/robots.txt': '/robots.txt' });
+
+  // Passthrough copy for JS files
+  eleventyConfig.addPassthroughCopy('src/assets/js/**/*.js');
+
+  // Open on npm start and watch CSS files for changes - doesn't trigger 11ty rebuild
+  eleventyConfig.setBrowserSyncConfig({
+    open: true,
+    files: './public/css/**/*.css',
+  });
+
+  // Allows the {% image %} shortcode to be used for optimised images (in webp if possible)
+  eleventyConfig.addNunjucksAsyncShortcode('image', imageShortcode);
+
+  // Date filters
+  // postDate: Human-readable format for blog posts (Nov 28, 2025)
+  eleventyConfig.addFilter('postDate', (dateObj) => {
+    return DateTime.fromJSDate(dateObj).toLocaleString(DateTime.DATE_MED);
+  });
+
+  // date: Flexible date formatting for sitemap and other uses
+  eleventyConfig.addFilter('date', (dateObj, format) => {
+    if (format === '%Y-%m-%d') {
+      return DateTime.fromJSDate(dateObj).toFormat('yyyy-MM-dd');
+    }
+    return DateTime.fromJSDate(dateObj).toISO();
+  });
+
+  // Production-only transforms (Critical CSS and HTML minification)
+  const isProduction = process.env.NODE_ENV === 'production';
+  if (isProduction) {
+    // Critical CSS transform
+    eleventyConfig.addTransform('criticalCss', async function(content, outputPath) {
+      if (outputPath && outputPath.endsWith('.html')) {
+        try {
+          const criticalModule = await import('critical');
+          const critical = criticalModule.default || criticalModule;
+          const result = await critical.generate({
+            inline: true,
+            base: 'public/',
+            html: content,
+            width: 1280,
+            height: 800,
+            css: ['public/assets/css/style.css']
+          });
+          return result.html;
+        } catch (err) {
+          console.error(`Critical CSS transform failed for ${outputPath}:`, err);
+          return content;
+        }
+      }
+      return content;
+    });
+
+    // HTML minification transform
+    eleventyConfig.addTransform('htmlmin', async function(content, outputPath) {
+      if (outputPath && outputPath.endsWith('.html')) {
+        try {
+          const htmlmin = await import('html-minifier-terser');
+          const minified = await htmlmin.minify(content, {
+            useShortDoctype: true,
+            removeComments: true,
+            collapseWhitespace: true,
+            conservativeCollapse: true,
+            minifyCSS: true,
+            minifyJS: true,
+            removeRedundantAttributes: true,
+            removeScriptTypeAttributes: true,
+            removeStyleLinkTypeAttributes: true
+          });
+          return minified;
+        } catch (err) {
+          console.error(`HTML minification failed for ${outputPath}:`, err);
+          return content;
+        }
+      }
+      return content;
+    });
+  }
+
+  // Gallery Shortcode for PhotoSwipe
+  eleventyConfig.addNunjucksAsyncShortcode("gallery", async function (images) {
+    if (!images || !Array.isArray(images)) return '';
+
+    const galleryItems = await Promise.all(images.map(async (item, index) => {
+      const src = item.image;
+      const alt = item.alt || `Gallery image ${index + 1}`;
+
+      const metadata = await Image(`./${src}`, {
+        widths: [600, 1200],
+        formats: ['avif', 'webp', 'jpeg'],
+        outputDir: './public/images/',
+        urlPath: '/images/',
+      });
+
+      const thumb = metadata.jpeg.find(img => img.width === 600);
+      const full = metadata.jpeg.find(img => img.width === 1200);
+
+      return `
+        <a href="${full.url}" data-pswp-width="1200" data-pswp-height="auto" class="pswp-gallery__item">
+          <img src="${thumb.url}" alt="${alt}" class="w-full h-auto object-cover" />
+        </a>
+      `;
+    }));
+
+    return `
+      <div class="masonry-grid pswp-gallery" id="gallery">
+        ${galleryItems.join('')}
+      </div>
+    `;
+  });
+
+
+  return {
+    dir: {
+      input: 'src',
+      includes: '_includes',
+      layouts: '_layouts',
+      output: 'public',
+    },
+    htmlTemplateEngine: 'njk',
+  };
+};

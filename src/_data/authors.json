@@ -1,0 +1,16 @@
+{
+  "author-one": {
+    "name": "Author One",
+    "slug": "author-one",
+    "image": "/assets/images/authors/author-one.jpg",
+    "bio": "Example author bio. Replace with your author's background and expertise.",
+    "title": "Position Title"
+  },
+  "author-two": {
+    "name": "Author Two",
+    "slug": "author-two",
+    "image": "/assets/images/authors/author-two.jpg",
+    "bio": "Example author bio. Replace with your author's background and expertise.",
+    "title": "Position Title"
+  }
+}

@@ -1,0 +1,66 @@
+---
+layout: 'base.html'
+eleventyComputed:
+    description: '{{ metaDescription | default: excerpt }}'
+    metaTitle: '{{ postTitle }}'
+    tagTitle: '{{ seoTitle }}'
+    preloadImg: '{{ image }}'
+    permalink: '/blog/{{ pageName | slug }}/index.html'
+---
+
+<!-- ============================================ -->
+<!--                 Page Banner                  -->
+<!-- ============================================ -->
+
+<section class="page-banner">
+  <div class="page-banner__container">
+    <h1 class="page-banner__title">{{ postTitle }}</h1>
+    {% set authorData = authors[author] %}
+    <div class="page-banner__meta">
+      <img
+        class="page-banner__author-image"
+        src="{{ authorData.image }}"
+        alt="{{ authorData.name }}"
+        width="32"
+        height="32"
+        decoding="async"
+      />
+      <span class="page-banner__author">{{ authorData.name }}</span>
+      <span class="page-banner__date">{{ date | postDate }}</span>
+    </div>
+  </div>
+  <div class="page-banner__background">
+    {% image './src/assets/images/cabinets2.jpg', 'cabinets', '', 'eager', '(max-width: 850px) 850px, 1920px'%}
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!--                Blog Layout                   -->
+<!-- ============================================ -->
+
+<section class="blog-layout">
+  <div class="blog-layout__container" data-animate-group data-animate-fast>
+    <!--Main content -->
+    <main class="blog-layout__main">
+      <article class="blog-post">
+        <!--Main Article Image-->
+        <div class="blog-post__image-wrapper">
+          {% image './src/assets/images/blog/' + pageName + '.jpg', imageAlt, '', 'eager', '(max-width: 850px) 850px, 1920px'%}
+        </div>
+
+        <!--Article Content-->
+        <div class="blog-post__content">
+          {{ content | safe }}
+        </div>
+      </article>
+    </main>
+
+    <!-- ============================================ -->
+    <!--                Blog Sidebar                  -->
+    <!-- ============================================ -->
+
+    <aside class="blog-layout__sidebar">
+      {% include 'featured-post.html' %}
+    </aside>
+  </div>
+</section>

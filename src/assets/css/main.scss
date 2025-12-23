@@ -1,0 +1,48 @@
+// =============================================================================
+// MAIN STYLESHEET - COMPONENT-BASED ARCHITECTURE
+// =============================================================================
+
+// 1. Abstracts
+// -----------------------------------------------------------------------------
+@use 'abstracts/variables';
+@use 'abstracts/mixins';
+
+// 1.5. Vendor/Third-party CSS
+// -----------------------------------------------------------------------------
+@use 'vendor';
+
+// 2. Base
+// -----------------------------------------------------------------------------
+@use 'base/reset';
+
+// 3. Layout
+// -----------------------------------------------------------------------------
+@use 'layout/containers';
+
+// 4. Components
+// -----------------------------------------------------------------------------
+@use 'components/buttons';
+@use 'components/navigation';
+@use 'components/hero';
+@use 'components/page-banner';
+@use 'components/services';
+@use 'components/content-blocks';
+@use 'components/gallery';
+@use 'components/reviews';
+@use 'components/cta';
+@use 'components/forms';
+@use 'components/contact-layout';
+@use 'components/contact-info';
+@use 'components/blog-layout';
+@use 'components/article-card';
+@use 'components/blog-post';
+@use 'components/sidebar';
+@use 'components/pagination';
+@use 'components/terms-content';
+@use 'components/footer';
+
+// 5. Utilities
+// -----------------------------------------------------------------------------
+@use 'utilities/spacing';
+@use 'utilities/transitions';
+@use 'utilities/animations'; 

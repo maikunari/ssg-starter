@@ -1,0 +1,34 @@
+{
+  "name": "Your Business Name",
+  "email": "contact@yourbusiness.com",
+  "phone": "555-0100",
+  "phoneFormatted": "(555) 010-0100",
+  "emergencyPhone": "555-0911",
+  "emergencyPhoneFormatted": "(555) 091-0911",
+  "address": {
+    "lineOne": "123 Main Street",
+    "lineTwo": "",
+    "city": "Your City",
+    "county": "ST",
+    "postcode": "12345",
+    "mapLink": "https://maps.google.com/?q=123+Main+Street+Your+City+ST"
+  },
+  "domain": "www.yourdomain.com",
+  "hours": {
+    "monday": "9:00 AM - 5:00 PM",
+    "tuesday": "9:00 AM - 5:00 PM",
+    "wednesday": "9:00 AM - 5:00 PM",
+    "thursday": "9:00 AM - 5:00 PM",
+    "friday": "9:00 AM - 5:00 PM",
+    "saturday": "10:00 AM - 3:00 PM",
+    "sunday": "Closed"
+  },
+  "services": [
+    "Service One",
+    "Service Two",
+    "Service Three"
+  ],
+  "established": "2020",
+  "yearsInBusiness": "4",
+  "teamSize": "5"
+}
