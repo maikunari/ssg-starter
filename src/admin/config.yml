@@ -20,7 +20,6 @@ public_folder: "/images/blog"
 media_libraries:
   - name: default
     config:
-      multiple: true  # Enable multi-file upload
       max_file_size: 5120000  # 5MB max file size
       transformations:
         raster_image:
