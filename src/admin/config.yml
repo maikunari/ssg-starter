@@ -56,4 +56,15 @@ collections:
         hint: "Upload image - will be automatically converted to WebP and resized (max 1920px, maintains aspect ratio)"
         choose_url: false
       - {label: "Image Alt Text", name: "imageAlt", widget: "string"}
-      - {label: "Body", name: "body", widget: "markdown"}
+      - label: "Body"
+        name: "body"
+        widget: "markdown"
+        media_library:
+          config:
+            max_file_size: 5120000
+            transformations:
+              raster_image:
+                format: webp
+                quality: 85
+                width: 1920
+                height: 1920

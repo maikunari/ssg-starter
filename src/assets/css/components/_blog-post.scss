@@ -33,6 +33,15 @@
       h2 { font-size: clamp(1.5rem, 3.5vw, 2rem); }
       h3 { font-size: clamp(1.25rem, 3vw, 1.75rem); }
 
+      // Constrain inline markdown images
+      img {
+        max-width: 100%;
+        height: auto;
+        display: block;
+        margin: calc(24rem / 16) 0;
+        border-radius: calc(8rem / 16);
+      }
+
       p {
         font-size: calc(18rem / 16);
         line-height: 1.6em;
