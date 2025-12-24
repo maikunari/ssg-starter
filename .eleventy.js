@@ -58,6 +58,9 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy('./src/_redirects');
   eleventyConfig.addPassthroughCopy({ './src/robots.txt': '/robots.txt' });
 
+  // Copy blog images to /images/blog/ for markdown image references
+  eleventyConfig.addPassthroughCopy({ './src/assets/images/blog': '/images/blog' });
+
   // Passthrough copy for JS files
   eleventyConfig.addPassthroughCopy('src/assets/js/**/*.js');
 
