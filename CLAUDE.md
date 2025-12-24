@@ -8,11 +8,11 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - Theme-aware SCSS architecture (7 pre-built themes)
 - Interactive setup wizard for quick configuration
 - GSAP scroll animations with native View Transitions API
-- Decap CMS for blog management
+- Sveltia CMS for blog management (modern successor to Decap CMS)
 - Responsive image optimization via @11ty/eleventy-img
 - PhotoSwipe gallery integration with Masonry layouts
 
-**Tech Stack**: Eleventy 3.x, Sass, PostCSS/Autoprefixer, esbuild, GSAP, View Transitions API, Decap CMS
+**Tech Stack**: Eleventy 3.x, Sass, PostCSS/Autoprefixer, esbuild, GSAP, View Transitions API, Sveltia CMS
 
 ## Template Setup
 
@@ -94,7 +94,7 @@ npm run postcss          # Run Autoprefixer on compiled CSS
 ```bash
 npm run build:eleventy   # Build Eleventy site only
 npm run start:eleventy   # Start Eleventy dev server only
-npm run start:proxy      # Start Decap CMS proxy server for local development
+npm run start:proxy      # Start CMS proxy server for local development
 ```
 
 ## Architecture Overview
@@ -235,13 +235,16 @@ Global design tokens in `src/assets/css/base/_reset.scss`:
 - Browser lazy loading doesn't re-trigger after View Transitions
 - Example: `{% image src, alt, 'gallery__image', 'eager' %}`
 
-### Decap CMS Integration
+### Sveltia CMS Integration
 **Access**: `http://localhost:8080/admin` (local development)
 
+**About Sveltia CMS**: Modern, open-source successor to Decap CMS with native drag-and-drop, better UX, and faster performance.
+
 **Configuration**: `src/admin/config.yml`
-- Backend: Git Gateway (branch: `develop`)
+- Backend: GitHub (branch: `main`)
 - Media folder: `src/assets/images/blog/`
 - Local backend enabled for development
+- **Note**: Sveltia CMS does not support git-gateway backend (uses GitHub/GitLab/Gitea instead)
 
 **Blog Post Schema**:
 ```yaml
@@ -367,7 +370,7 @@ output: public/
 3. **Forgetting to re-initialize scripts** after View Transitions (use `pagereveal` event)
 4. **Not killing ScrollTriggers** before creating new ones (causes duplicates)
 5. **Missing "post" tag** in blog post frontmatter (posts won't appear in collections)
-6. **Branch mismatch** in Decap CMS config (must match current Git branch)
+6. **Branch mismatch** in CMS config (must match current Git branch)
 7. **Using `loading="lazy"` on gallery images** - breaks with View Transitions, use `eager` instead
 
 ## Deployment Notes

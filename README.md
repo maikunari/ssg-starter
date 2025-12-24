@@ -32,7 +32,7 @@ Visit `http://localhost:8080` to see your site!
 
 - **🎨 7 Professional Themes** - Switch with a single variable
 - **🚀 Interactive Setup Wizard** - Configure your site in minutes
-- **📝 Decap CMS** - Client-friendly blog management
+- **📝 Sveltia CMS** - Client-friendly blog management with drag-and-drop
 - **✨ GSAP Animations** - Smooth scroll animations
 - **🖼️ Image Optimization** - Auto AVIF/WebP/JPEG generation
 - **📱 Fully Responsive** - Mobile-first design
@@ -71,7 +71,7 @@ Switch themes by changing one variable in `src/assets/css/abstracts/_schemes.scs
 - **Eleventy 3.x** - Fast, flexible static site generator
 - **Sass** - Modular CSS with 7-1 architecture
 - **GSAP** - Professional-grade animations
-- **Decap CMS** - Git-based content management
+- **Sveltia CMS** - Modern Git-based content management with native drag-and-drop
 - **esbuild** - Lightning-fast JavaScript bundling
 - **PostCSS** - Automatic vendor prefixing
 - **Eleventy Image** - Responsive image optimization
@@ -165,7 +165,7 @@ ssg-starter/
 │   ├── _data/              # Global data (client info, authors)
 │   ├── _includes/          # Reusable components
 │   ├── _layouts/           # Page layouts
-│   ├── admin/              # Decap CMS configuration
+│   ├── admin/              # Sveltia CMS configuration
 │   ├── assets/
 │   │   ├── css/            # SCSS (7-1 architecture)
 │   │   ├── js/             # JavaScript source
@@ -215,9 +215,11 @@ Always use the `schemes.color()` function:
 
 Never hardcode colors! See [CLAUDE.md](./CLAUDE.md#theme-system-architecture) for details.
 
-## Decap CMS
+## Sveltia CMS
 
-Manage blog content through a visual interface at `http://localhost:8080/admin`
+Manage blog content through a modern visual interface at `http://localhost:8080/admin`
+
+**Native Drag-and-Drop**: Upload images by simply dragging them onto the CMS interface - no file picker needed!
 
 ### Local Development
 
@@ -230,11 +232,10 @@ Navigate to `http://localhost:8080/admin` to access the CMS.
 ### Production Setup
 
 1. Deploy to Netlify
-2. Enable Netlify Identity
-3. Enable Git Gateway
-4. Invite users via Identity tab
+2. Configure GitHub OAuth in repository settings
+3. Or use [Sveltia CMS Authenticator](https://github.com/sveltia/sveltia-cms-auth) for simple authentication
 
-See [Quick Start Guide - Deployment](./QUICK_START.md#deployment) for full instructions.
+**Note**: Sveltia CMS uses GitHub backend (not git-gateway). See [Quick Start Guide - Deployment](./QUICK_START.md#deployment) for full instructions.
 
 ## Deployment
 
@@ -253,9 +254,8 @@ See [Quick Start Guide - Deployment](./QUICK_START.md#deployment) for full instr
    - Deploy!
 
 3. **Enable CMS**:
-   - Enable Netlify Identity
-   - Enable Git Gateway
-   - Invite users
+   - Configure GitHub OAuth for authentication
+   - Or use Sveltia CMS Authenticator for simpler setup
 
 All build settings are pre-configured in `netlify.toml`.
 
@@ -416,7 +416,7 @@ MIT License - see [LICENSE.md](./LICENSE.md) for details.
 Built with:
 - [Eleventy](https://www.11ty.dev/) by Zach Leatherman
 - [GSAP](https://gsap.com/) by GreenSock
-- [Decap CMS](https://decapcms.org/) (formerly Netlify CMS)
+- [Sveltia CMS](https://github.com/sveltia/sveltia-cms) - Modern successor to Decap CMS
 - [PhotoSwipe](https://photoswipe.com/) by Dmytro Semenov
 
 ---

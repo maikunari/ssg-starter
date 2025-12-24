@@ -8,10 +8,9 @@ author: author-one
 date: 2025-01-01T09:00:00.000Z
 tags:
   - post
-image: /images/blog/welcome-to-your-new-blog.jpg
+image: /images/blog/screenshot-2025-12-23-at-5.14.31 pm.png
 imageAlt: Welcome to your new blog
 ---
-
 # Welcome to Your New Blog!
 
 This is your first blog post. You can edit this post or delete it and start creating your own content.

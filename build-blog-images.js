@@ -1,7 +1,7 @@
 /**
  * Blog Image Processing Script
  *
- * Automatically processes blog images uploaded via Decap CMS:
+ * Automatically processes blog images uploaded via Sveltia CMS:
  * 1. Reads blog post frontmatter to find image paths
  * 2. Renames images to match pageName
  * 3. Crops/resizes to blog header aspect ratio (16:9)

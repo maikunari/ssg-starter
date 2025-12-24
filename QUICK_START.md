@@ -23,7 +23,7 @@ SSG-Starter is a production-ready Eleventy static site generator template design
 ### Features
 
 - **🎨 7 Pre-built Themes** - Switch themes with a single variable change
-- **📝 Decap CMS Integration** - Client-friendly content management
+- **📝 Sveltia CMS Integration** - Client-friendly content management with native drag-and-drop
 - **✨ GSAP Scroll Animations** - Smooth, performant animations
 - **🖼️ Image Optimization** - Automatic AVIF/WebP/JPEG generation
 - **📱 Fully Responsive** - Mobile-first design
@@ -38,7 +38,7 @@ SSG-Starter is a production-ready Eleventy static site generator template design
 - **PostCSS/Autoprefixer** - CSS vendor prefixing
 - **esbuild** - Fast JavaScript bundling
 - **GSAP** - Professional-grade animations
-- **Decap CMS** - Git-based content management
+- **Sveltia CMS** - Modern Git-based content management with native drag-and-drop
 - **Netlify** - Recommended deployment platform
 
 ## Prerequisites
@@ -310,7 +310,7 @@ eleventyNavigation:
 
 ### Writing Blog Posts
 
-#### Via Decap CMS (Recommended for Clients)
+#### Via Sveltia CMS (Recommended for Clients)
 
 1. Start the CMS proxy server:
 ```bash
@@ -320,7 +320,7 @@ npm run start:proxy
 2. Navigate to `http://localhost:8080/admin`
 3. Click "New Post"
 4. Fill in all fields
-5. Upload featured image
+5. Upload featured image (drag-and-drop supported!)
 6. Save and publish
 
 #### Manually (Markdown Files)
@@ -357,7 +357,7 @@ This starts:
 - ✅ Eleventy dev server (port 8080)
 - ✅ Sass compiler (watches for changes)
 - ✅ JavaScript bundler (watches for changes)
-- ✅ Decap CMS proxy server
+- ✅ Sveltia CMS proxy server
 
 ### Available Commands
 
@@ -612,7 +612,7 @@ After completing this guide:
 ## Additional Resources
 
 - [Eleventy Documentation](https://www.11ty.dev/docs/)
-- [Decap CMS Documentation](https://decapcms.org/docs/)
+- [Sveltia CMS Documentation](https://github.com/sveltia/sveltia-cms)
 - [GSAP Documentation](https://gsap.com/docs/)
 - [Netlify Documentation](https://docs.netlify.com/)
 

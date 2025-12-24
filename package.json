@@ -1,7 +1,7 @@
 {
   "name": "ssg-starter",
   "version": "1.0.0",
-  "description": "SSG Starter - Eleventy static site generator with theme system, GSAP animations, and Decap CMS",
+  "description": "SSG Starter - Eleventy static site generator with theme system, GSAP animations, and Sveltia CMS",
   "main": "index.js",
   "scripts": {
     "start": "npm run start:proxy & npm run watch:scss & npm run watch:js & npm run start:eleventy",
@@ -28,7 +28,7 @@
     "ssg",
     "template",
     "starter-kit",
-    "decap-cms",
+    "sveltia-cms",
     "gsap",
     "sass",
     "business-website"
