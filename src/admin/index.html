@@ -3,24 +3,25 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Decap CMS</title>
+    <title>Sveltia CMS</title>
     <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
   </head>
   <body>
-    <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+    <!-- Sveltia CMS - Modern successor to Decap CMS with native drag-and-drop -->
+    <script type="module" src="https://unpkg.com/@sveltia/cms/dist/sveltia-cms.js"></script>
     <script>
       // Register preview styles to match front-end blog post design
       CMS.registerPreviewStyle("/admin/preview.css");
 
       // Author data lookup
       const authors = {
-        'tom-maplewood': {
-          name: 'Tom Maplewood',
-          image: '/assets/images/authors/tom-maplewood.jpg'
+        'author-one': {
+          name: 'Author One',
+          image: '/assets/images/authors/author-one.jpg'
         },
-        'sarah-maplewood': {
-          name: 'Sarah Maplewood',
-          image: '/assets/images/authors/sarah-maplewood.jpg'
+        'author-two': {
+          name: 'Author Two',
+          image: '/assets/images/authors/author-two.jpg'
         }
       };
 
