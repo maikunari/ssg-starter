@@ -66,10 +66,3 @@ collections:
         media_library:
           config:
             multiple: true
-            max_file_size: 5120000
-            transformations:
-              raster_image:
-                format: webp
-                quality: 85
-                width: 1920
-                height: 1920
