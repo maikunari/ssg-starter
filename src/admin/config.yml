@@ -15,6 +15,19 @@ logo_url: https://yourdomain.com/assets/images/logo-color.png # Update with your
 media_folder: "src/assets/images/blog"
 public_folder: "/images/blog"
 
+# Sveltia CMS built-in image optimizer
+# Automatically converts images to WebP and resizes on upload
+media_libraries:
+  - name: default
+    config:
+      max_file_size: 5120000  # 5MB max file size
+      transformations:
+        raster_image:
+          format: webp
+          quality: 85
+          width: 1920
+          height: 1920
+
 collections:
   - name: "blog"
     label: "Blog"
@@ -37,6 +50,10 @@ collections:
           - {label: "Author Two", value: "author-two"}
       - {label: "Publish Date", name: "date", widget: "datetime"}
       - {label: "Tags", name: "tags", widget: "list", default: ["post"]}
-      - {label: "Featured Image", name: "image", widget: "image", hint: "Upload image - it will be automatically named based on Page Name"}
+      - label: "Featured Image"
+        name: "image"
+        widget: "image"
+        hint: "Upload image - will be automatically converted to WebP and resized (max 1920px, maintains aspect ratio)"
+        choose_url: false
       - {label: "Image Alt Text", name: "imageAlt", widget: "string"}
       - {label: "Body", name: "body", widget: "markdown"}

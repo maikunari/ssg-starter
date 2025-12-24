@@ -45,7 +45,7 @@ eleventyComputed:
       <article class="blog-post">
         <!--Main Article Image-->
         <div class="blog-post__image-wrapper">
-          {% image './src/assets/images/blog/' + pageName + '.jpg', imageAlt, '', 'eager', '(max-width: 850px) 850px, 1920px'%}
+          {% image './src/assets' + image, imageAlt, '', 'eager', '(max-width: 850px) 850px, 1920px'%}
         </div>
 
         <!--Article Content-->

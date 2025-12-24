@@ -49,7 +49,7 @@ permalink: "blog/{% if pagination.pageNumber > 0 %}page-{{ pagination.pageNumber
         <article class="article-card">
           <!--Main Article Image-->
           <div class="article-card__image-wrapper">
-            {% image './src/assets/images/blog/' + post.data.pageName + '.jpg', post.data.imageAlt, 'article-card__image', 'lazy', '(max-width: 850px) 850px, 1920px'%}
+            {% image './src/assets' + post.data.image, post.data.imageAlt, 'article-card__image', 'lazy', '(max-width: 850px) 850px, 1920px'%}
           </div>
           <!--Article Info-->
           <div class="article-card__content">

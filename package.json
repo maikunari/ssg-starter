@@ -5,8 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "npm run start:proxy & npm run watch:scss & npm run watch:js & npm run start:eleventy",
-    "build": "npm run clean && npm run build:blog-images && npm run build:scss && NODE_ENV=production npm run build:eleventy && npm run build:assets",
-    "build:blog-images": "node build-blog-images.js",
+    "build": "npm run clean && npm run build:scss && NODE_ENV=production npm run build:eleventy && npm run build:assets",
     "build:scss": "sass src/assets/css/main.scss public/assets/css/style.css --no-source-map --style=compressed && postcss public/assets/css/style.css -o public/assets/css/style.css",
     "watch:scss": "sass --watch src/assets/css/main.scss:public/assets/css/style.css",
     "postcss": "postcss public/assets/css/style.css -o public/assets/css/style.css",

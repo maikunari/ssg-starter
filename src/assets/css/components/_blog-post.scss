@@ -11,7 +11,6 @@
     &__image-wrapper {
       position: relative;
       width: 100%;
-      height: calc(300rem / 16);
       border-radius: calc(16rem / 16);
       overflow: hidden;
       margin-bottom: calc(32rem / 16);
@@ -19,8 +18,8 @@
 
     &__image {
       width: 100%;
-      height: 100%;
-      object-fit: cover;
+      height: auto;
+      display: block;
     }
 
     &__content {
@@ -83,17 +82,13 @@
 /* Tablet - 768px */
 @media only screen and (min-width: 48rem) {
   .blog-post {
-    &__image-wrapper {
-      height: calc(400rem / 16);
-    }
+    // No additional styles needed - using natural image heights
   }
 }
 
 /* Desktop - 1024px */
 @media only screen and (min-width: 64rem) {
   .blog-post {
-    &__image-wrapper {
-      height: calc(450rem / 16);
-    }
+    // No additional styles needed - using natural image heights
   }
 } 
