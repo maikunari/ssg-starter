@@ -56,13 +56,5 @@ collections:
         widget: "image"
         hint: "Upload image - will be automatically converted to WebP and resized (max 1920px, maintains aspect ratio)"
         choose_url: false
-        media_library:
-          config:
-            multiple: false
       - {label: "Image Alt Text", name: "imageAlt", widget: "string"}
-      - label: "Body"
-        name: "body"
-        widget: "markdown"
-        media_library:
-          config:
-            multiple: true
+      - {label: "Body", name: "body", widget: "markdown"}
