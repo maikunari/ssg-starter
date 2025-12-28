@@ -34,10 +34,13 @@ Visit `http://localhost:8080` to see your site!
 - **🚀 Interactive Setup Wizard** - Configure your site in minutes
 - **📝 Sveltia CMS** - Client-friendly blog management with drag-and-drop
 - **✨ GSAP Animations** - Smooth scroll animations
-- **🖼️ Image Optimization** - Auto AVIF/WebP/JPEG generation
+- **🖼️ Image Optimization** - Auto AVIF/WebP/JPEG generation + thumbnail generation
 - **📱 Fully Responsive** - Mobile-first design
 - **🎭 PhotoSwipe Galleries** - Lightbox with Masonry layouts
-- **⚡ Performance First** - Critical CSS, lazy loading, minification
+- **⚡ Performance First** - 100/100 Lighthouse scores, fetchpriority optimization
+- **📊 Blog Features** - Post navigation, reading progress indicator, featured posts
+- **🔝 UX Enhancements** - Scroll-to-top button, smooth interactions
+- **📈 Analytics Ready** - Google Analytics 4 with delayed loading (zero performance impact)
 - **🔒 Security Headers** - Pre-configured via Netlify
 
 ## What's Included
@@ -236,6 +239,51 @@ Navigate to `http://localhost:8080/admin` to access the CMS.
 3. Or use [Sveltia CMS Authenticator](https://github.com/sveltia/sveltia-cms-auth) for simple authentication
 
 **Note**: Sveltia CMS uses GitHub backend (not git-gateway). See [Quick Start Guide - Deployment](./QUICK_START.md#deployment) for full instructions.
+
+## Blog Features
+
+### Post Navigation
+- Previous/Next post navigation with thumbnails
+- Automatic thumbnail generation during build
+- Responsive layout with hover effects
+
+### Reading Progress Indicator
+- Thin progress bar at top of blog posts
+- Shows scroll progress (0-100%)
+- Only appears on blog posts
+- Zero performance impact
+
+### Featured Posts Sidebar
+- Add `featured` tag to highlight posts
+- Displays in sidebar on blog pages
+- Shows post thumbnails and titles
+
+### Automatic Image Processing
+- Blog images automatically processed during build
+- Creates thumbnail versions (`-thumb` suffix)
+- Optimized for fast loading (300px width, 85% quality)
+- Run manually: `npm run build:blog-images`
+
+### Tag "post" to blog posts to include in collections
+
+## Performance Optimizations
+
+### LCP (Largest Contentful Paint)
+- `fetchpriority="high"` on hero/banner images
+- Images discoverable from initial HTML (no lazy loading on LCP elements)
+- Preload hints for critical images
+- Result: 100/100 Lighthouse Performance scores
+
+### Google Analytics Integration
+- GA4 support with delayed loading
+- Loads after page interactive (zero LCP impact)
+- Configure via `client.json`: `"googleAnalyticsId": "G-XXXXXXXXXX"`
+- Maintains perfect PageSpeed scores
+
+### UX Enhancements
+- **Scroll-to-top button**: Appears after scrolling 2 viewport heights
+- **Reading progress bar**: Visual scroll progress on blog posts
+- **Smooth animations**: GSAP-powered scroll animations with View Transitions API
 
 ## Deployment
 

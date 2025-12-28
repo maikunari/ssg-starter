@@ -14,6 +14,7 @@
     "mapLink": "https://maps.google.com/?q=123+Main+Street+Your+City+ST"
   },
   "domain": "www.yourdomain.com",
+  "googleAnalyticsId": "",
   "hours": {
     "monday": "9:00 AM - 5:00 PM",
     "tuesday": "9:00 AM - 5:00 PM",

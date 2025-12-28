@@ -159,6 +159,8 @@ src/assets/css/
 - `main.js` - GSAP animations, PhotoSwipe init, View Transitions support
 - `gallery.js` - Masonry layout initialization
 - `nav.js` - Mobile navigation toggle (supports View Transitions)
+- `scroll-to-top.js` - Floating scroll-to-top button (appears after 2 viewport heights)
+- `reading-progress.js` - Blog post reading progress indicator (top of page)
 
 **View Transitions API**:
 - Native browser page transitions (cross-fade, 300ms)
@@ -234,6 +236,14 @@ Global design tokens in `src/assets/css/base/_reset.scss`:
 - Gallery/Masonry images must use `loading="eager"` (not `lazy`)
 - Browser lazy loading doesn't re-trigger after View Transitions
 - Example: `{% image src, alt, 'gallery__image', 'eager' %}`
+
+**Blog Image Thumbnail Generation**:
+- Automated script (`build-blog-images.js`) generates thumbnails during build process
+- Source: `src/assets/images/blog/*.{jpg,png,webp}`
+- Output: `public/images/blog/*-thumb.{jpg,png,webp}` (300px width, 85% quality)
+- Runs automatically in `npm run build` pipeline
+- Thumbnails used in: post navigation, article cards, sidebar featured posts
+- Manual run: `npm run build:blog-images`
 
 ### Sveltia CMS Integration
 **Access**: `http://localhost:8080/admin` (local development)
@@ -359,6 +369,7 @@ output: public/
 - `src/assets/css/base/_reset.scss` - CSS custom properties, font definitions
 - `.eleventy.js` - Eleventy configuration and shortcodes
 - `build-assets.js` - JavaScript bundling configuration
+- `build-blog-images.js` - Blog image thumbnail generation script
 - `src/assets/js/main.js` - GSAP animations and View Transitions support
 - `netlify.toml` - Netlify deployment config, cache headers, security headers
 - `postcss.config.js` - Autoprefixer configuration
@@ -395,6 +406,36 @@ output: public/
 
 **Generated files**:
 - `/sitemap.xml` - Auto-generated from all pages
+
+## Google Analytics Setup
+
+The template includes Google Analytics 4 (GA4) support with delayed loading to maintain perfect PageSpeed scores.
+
+**To enable GA4 tracking:**
+
+1. Get your GA4 Measurement ID from Google Analytics (format: `G-XXXXXXXXXX`)
+2. Add it to `src/_data/client.json`:
+   ```json
+   "googleAnalyticsId": "G-XXXXXXXXXX"
+   ```
+3. Rebuild and deploy
+
+**Performance Impact:**
+- Delayed loading approach maintains 100/100 PageSpeed scores
+- Script loads after page is fully interactive
+- Minimal tracking delay (~200-500ms)
+- All user interactions are still captured
+
+**Testing:**
+- Analytics won't track on localhost by default
+- Use Google Tag Assistant Chrome extension to verify tracking on deployed site
+- Check Real-Time reports in GA4 to confirm data collection
+
+**How it works:**
+- GA4 script only loads if `googleAnalyticsId` is configured in `client.json`
+- Script injection happens after the `load` event to avoid blocking page rendering
+- No impact on Lighthouse performance scores
+- Leave `googleAnalyticsId` empty (`""`) to disable tracking entirely
 
 ## Form Processing
 

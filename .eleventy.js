@@ -5,7 +5,7 @@ const Image = require('@11ty/eleventy-img');
 const path = require('path');
 
 // allows the use of {% image... %} to create responsive, optimised images
-async function imageShortcode(src, alt, className, loading = 'lazy', sizes = '(max-width: 600px) 300px, (max-width: 1200px) 600px, 1200px') {
+async function imageShortcode(src, alt, className, loading = 'lazy', sizes = '(max-width: 600px) 300px, (max-width: 1200px) 600px, 1200px', fetchpriority = '') {
   // don't pass an alt? chuck it out. passing an empty string is okay though
   if (alt === undefined) {
     throw new Error(`Missing \`alt\` on responsiveimage from: ${src}`);
@@ -28,6 +28,9 @@ async function imageShortcode(src, alt, className, loading = 'lazy', sizes = '(m
   let lowsrc = metadata.jpeg[0];
   let highsrc = metadata.jpeg[metadata.jpeg.length - 1];
 
+  // Build fetchpriority attribute if provided
+  const fetchpriorityAttr = fetchpriority ? ` fetchpriority="${fetchpriority}"` : '';
+
   // when {% image ... %} is used, this is what's returned
   return `<picture class="${className || ''}">
     ${Object.values(metadata)
@@ -43,7 +46,7 @@ async function imageShortcode(src, alt, className, loading = 'lazy', sizes = '(m
         height="${highsrc.height}"
         alt="${alt}"
         loading="${loading}"
-        decoding="async">
+        decoding="async"${fetchpriorityAttr}>
     </picture>`;
 }
 

@@ -1,0 +1,46 @@
+@use '../abstracts/variables' as vars;
+@use '../abstracts/schemes' as schemes;
+
+/*-- -------------------------- -->
+<---   Reading Progress Bar    -->
+<--- -------------------------- -*/
+
+/* Mobile - 360px */
+@media only screen and (min-width: 0rem) {
+  .reading-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: calc(3rem / 16);
+    background-color: #ffffff;
+    z-index: 9999;
+    pointer-events: none;
+
+    &__bar {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(
+        90deg,
+        schemes.color(primary),
+        schemes.color(primary-light)
+      );
+      transition: width 0.1s ease-out;
+      box-shadow: 0 0 calc(8rem / 16) rgba(schemes.color(primary), 0.3);
+    }
+  }
+}
+
+/* Tablet - 768px */
+@media only screen and (min-width: 48rem) {
+  .reading-progress {
+    height: calc(3rem / 16);
+  }
+}
+
+/* Desktop - 1024px */
+@media only screen and (min-width: 64rem) {
+  .reading-progress {
+    height: calc(3rem / 16);
+  }
+}

@@ -1,0 +1,81 @@
+@use '../abstracts/variables' as vars;
+@use '../abstracts/schemes' as schemes;
+
+/*-- -------------------------- -->
+<---     Scroll to Top Button    -->
+<--- -------------------------- -*/
+
+/* Mobile - 360px */
+@media only screen and (min-width: 0rem) {
+  .scroll-to-top {
+    position: fixed;
+    bottom: calc(24rem / 16);
+    right: calc(24rem / 16);
+    width: calc(48rem / 16);
+    height: calc(48rem / 16);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: schemes.color(primary);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(calc(20rem / 16));
+    transition: all 0.3s ease;
+    z-index: 1000;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+
+    &:hover {
+      background-color: schemes.color(primary-dark);
+      transform: translateY(0) scale(1.05);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+    }
+
+    &:active {
+      transform: translateY(0) scale(0.95);
+    }
+
+    &.visible {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    // Arrow icon
+    &::before {
+      content: '';
+      display: block;
+      width: calc(12rem / 16);
+      height: calc(12rem / 16);
+      border-top: 2px solid schemes.color(body-text-color-white);
+      border-right: 2px solid schemes.color(body-text-color-white);
+      transform: rotate(-45deg);
+      margin-top: calc(4rem / 16);
+    }
+  }
+}
+
+/* Tablet - 768px */
+@media only screen and (min-width: 48rem) {
+  .scroll-to-top {
+    bottom: calc(32rem / 16);
+    right: calc(32rem / 16);
+    width: calc(56rem / 16);
+    height: calc(56rem / 16);
+
+    &::before {
+      width: calc(14rem / 16);
+      height: calc(14rem / 16);
+    }
+  }
+}
+
+/* Desktop - 1024px */
+@media only screen and (min-width: 64rem) {
+  .scroll-to-top {
+    bottom: calc(40rem / 16);
+    right: calc(40rem / 16);
+  }
+}

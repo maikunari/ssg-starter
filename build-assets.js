@@ -38,6 +38,16 @@ if (fs.existsSync('src/assets/js/main.js')) {
   jsFiles.push('src/assets/js/main.js');
 }
 
+// Check if scroll-to-top.js exists and add it
+if (fs.existsSync('src/assets/js/scroll-to-top.js')) {
+  jsFiles.push('src/assets/js/scroll-to-top.js');
+}
+
+// Check if reading-progress.js exists and add it
+if (fs.existsSync('src/assets/js/reading-progress.js')) {
+  jsFiles.push('src/assets/js/reading-progress.js');
+}
+
 // Only create JS entry if we have files to bundle
 if (jsFiles.length > 0) {
   // Create a temporary JS entry point that imports all JS files

@@ -36,9 +36,12 @@
 @use 'components/blog-layout';
 @use 'components/article-card';
 @use 'components/blog-post';
+@use 'components/post-nav';
 @use 'components/sidebar';
 @use 'components/pagination';
 @use 'components/terms-content';
+@use 'components/scroll-to-top';
+@use 'components/reading-progress';
 @use 'components/footer';
 
 // 5. Utilities

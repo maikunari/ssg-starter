@@ -51,6 +51,23 @@
 
         <!-- Remove no-js class immediately when JS loads -->
         <script>document.documentElement.classList.remove('no-js');</script>
+
+        <!-- Google Analytics - Delayed Load for Performance -->
+        {% if client.googleAnalyticsId %}
+        <script>
+          window.addEventListener('load', function() {
+            var script = document.createElement('script');
+            script.async = true;
+            script.src = 'https://www.googletagmanager.com/gtag/js?id={{ client.googleAnalyticsId }}';
+            document.head.appendChild(script);
+
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', '{{ client.googleAnalyticsId }}');
+          });
+        </script>
+        {% endif %}
     </head>
     <body>
         <!--Screen reader skip main nav-->

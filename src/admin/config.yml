@@ -16,7 +16,8 @@ media_folder: "src/assets/images/blog"
 public_folder: "/images/blog"
 
 # Sveltia CMS built-in image optimizer
-# Automatically converts images to WebP and resizes on upload
+# Automatically optimizes images on upload (max 1920px, WebP format)
+# Note: Thumbnail generation is handled by build-blog-images.js during build process
 media_libraries:
   - name: default
     config:
@@ -27,6 +28,8 @@ media_libraries:
           quality: 85
           width: 1920
           height: 1920
+        svg:
+          optimize: true
 
 collections:
   - name: "blog"

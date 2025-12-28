@@ -30,7 +30,7 @@ eleventyComputed:
     </div>
   </div>
   <div class="page-banner__background">
-    {% image './src/assets/images/cabinets2.jpg', 'cabinets', '', 'eager', '(max-width: 850px) 850px, 1920px'%}
+    {% image './src/assets/images/cabinets2.jpg', 'cabinets', '', 'eager', '(max-width: 850px) 850px, 1920px', 'high'%}
   </div>
 </section>
 
@@ -45,13 +45,55 @@ eleventyComputed:
       <article class="blog-post">
         <!--Main Article Image-->
         <div class="blog-post__image-wrapper">
-          {% image './src/assets' + image, imageAlt, '', 'eager', '(max-width: 850px) 850px, 1920px'%}
+          {% image './src/assets' + image, imageAlt, '', 'eager', '(max-width: 850px) 850px, 1920px', 'high'%}
         </div>
 
         <!--Article Content-->
         <div class="blog-post__content">
           {{ content | safe }}
         </div>
+
+        <!--Post Navigation-->
+        <nav class="post-nav">
+          {%- set previousPost = collections.post | getPreviousCollectionItem -%}
+          {%- set nextPost = collections.post | getNextCollectionItem -%}
+
+          {% if previousPost %}
+          <a href="{{ previousPost.url }}" class="post-nav__link post-nav__link--prev">
+            {%- set prevImage = previousPost.data.image | replace('.jpg', '-thumb.jpg') | replace('.png', '-thumb.png') | replace('.webp', '-thumb.webp') -%}
+            <img
+              src="{{ prevImage }}"
+              alt="{{ previousPost.data.imageAlt }}"
+              class="post-nav__thumbnail"
+              width="80"
+              height="80"
+              loading="lazy"
+            />
+            <div class="post-nav__content">
+              <span class="post-nav__label">Previous Post</span>
+              <span class="post-nav__title">{{ previousPost.data.postTitle }}</span>
+            </div>
+          </a>
+          {% endif %}
+
+          {% if nextPost %}
+          <a href="{{ nextPost.url }}" class="post-nav__link post-nav__link--next">
+            {%- set nextImage = nextPost.data.image | replace('.jpg', '-thumb.jpg') | replace('.png', '-thumb.png') | replace('.webp', '-thumb.webp') -%}
+            <img
+              src="{{ nextImage }}"
+              alt="{{ nextPost.data.imageAlt }}"
+              class="post-nav__thumbnail"
+              width="80"
+              height="80"
+              loading="lazy"
+            />
+            <div class="post-nav__content">
+              <span class="post-nav__label">Next Post</span>
+              <span class="post-nav__title">{{ nextPost.data.postTitle }}</span>
+            </div>
+          </a>
+          {% endif %}
+        </nav>
       </article>
     </main>
 
