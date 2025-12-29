@@ -34,7 +34,9 @@
         <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/roboto-v29-latin-700.woff2" crossorigin>
         <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/roboto-v29-latin-900.woff2" crossorigin>
     
-        <link rel="preload" as="image" href="{{ preloadImg }}"/>
+        {% if preloadImg %}
+        <link rel="preload" as="image" href="{{ preloadImg }}" imagesrcset="/images/landing-300w.avif 300w, /images/landing-450w.avif 450w, /images/landing-600w.avif 600w, /images/landing-1200w.avif 1200w" imagesizes="100vw" type="image/avif"/>
+        {% endif %}
 
         <!-- Loading combined CSS file -->
         <link rel="stylesheet" href="/assets/css/style.css"/>
