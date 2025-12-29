@@ -4,6 +4,7 @@
 
 @use '../abstracts/variables' as vars;
 @use '../abstracts/mixins' as mix;
+@use '../abstracts/schemes' as schemes;
 
 // Base button styles
 // -----------------------------------------------------------------------------
@@ -33,16 +34,16 @@
   height: 3.125rem;
   width: auto;
   padding: 0 1.875rem;
-  background-color: vars.$primary;
-  color: #000;
-  
+  background-color: schemes.color(primary);
+  color: schemes.color(dark);
+
   &::before {
     content: '';
     position: absolute;
     display: block;
     height: 100%;
     width: 0;
-    background-color: #000;
+    background-color: schemes.color(dark);
     opacity: 1;
     top: 0;
     left: 0;
@@ -51,8 +52,8 @@
   }
   
   &:hover {
-    color: #fff;
-    
+    color: schemes.color(body-text-color-white);
+
     &::before {
       width: 100%;
     }
@@ -65,16 +66,16 @@
   line-height: clamp(2.875em, 5.5vw, 3.5em);
   width: 11.25rem;
   margin: 0;
-  color: vars.$header-color;
-  background-color: vars.$primary;
-  
+  color: schemes.color(header-color);
+  background-color: schemes.color(primary);
+
   &::before {
     content: '';
     position: absolute;
     display: block;
     height: 100%;
     width: 0%;
-    background: #000;
+    background: schemes.color(dark);
     opacity: 1;
     top: 0;
     left: 0;
@@ -83,8 +84,8 @@
   }
   
   &:hover {
-    color: vars.$body-text-color-white;
-    
+    color: schemes.color(body-text-color-white);
+
     &::before {
       width: 100%;
     }
@@ -96,9 +97,9 @@
   width: 11.25rem;
   height: clamp(2.875em, 5.5vw, 3.5em);
   margin: 0;
-  color: #fff;
+  color: schemes.color(body-text-color-white);
   background-color: transparent;
-  border: 1px solid vars.$body-text-color-white;
+  border: 1px solid schemes.color(body-text-color-white);
   box-sizing: border-box;
   @include mix.flex-center;
   
@@ -106,7 +107,7 @@
     content: '';
     position: absolute;
     display: block;
-    background: #000;
+    background: schemes.color(dark);
     opacity: 1;
     top: -1px;
     left: -1px;
@@ -137,16 +138,16 @@
   height: 3.125rem;
   padding: 0 1.875rem;
   background-color: transparent;
-  color: vars.$primary;
-  border: 2px solid vars.$primary;
-  
+  color: schemes.color(primary);
+  border: 2px solid schemes.color(primary);
+
   &::before {
     content: '';
     position: absolute;
     display: block;
     height: 100%;
     width: 0;
-    background-color: vars.$primary;
+    background-color: schemes.color(primary);
     opacity: 1;
     top: 0;
     left: 0;
@@ -155,8 +156,8 @@
   }
   
   &:hover {
-    color: #000;
-    
+    color: schemes.color(dark);
+
     &::before {
       width: 100%;
     }

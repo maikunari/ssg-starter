@@ -13,7 +13,7 @@
     left: 0;
     width: 100%;
     height: calc(3rem / 16);
-    background-color: #ffffff;
+    background-color: schemes.color(body-bg-color);
     z-index: 9999;
     pointer-events: none;
 

@@ -1,3 +1,5 @@
+@use '../abstracts/schemes' as schemes;
+
 /*-- -------------------------- -->
 <---        Blog Post          -->
 <--- -------------------------- -*/
@@ -73,11 +75,11 @@
         padding-left: calc(24rem / 16);
         margin: calc(32rem / 16) 0;
         font-style: italic;
-        color: #666;
+        color: schemes.color(muted-text);
       }
 
       code {
-        background-color: #f8f9fa;
+        background-color: schemes.color(medium);
         padding: calc(2rem / 16) calc(6rem / 16);
         border-radius: calc(4rem / 16);
         font-family: 'Courier New', monospace;
@@ -85,7 +87,7 @@
       }
 
       pre {
-        background-color: #f8f9fa;
+        background-color: schemes.color(medium);
         padding: calc(20rem / 16);
         border-radius: calc(8rem / 16);
         overflow-x: auto;

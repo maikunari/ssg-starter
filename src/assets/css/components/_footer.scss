@@ -91,7 +91,7 @@
   &__description {
     font-size: 0.9rem;
     line-height: 1.6;
-    color: #e0e0e0;
+    color: schemes.color(body-text-color-white);
     max-width: 25rem;
     margin: 0 auto;
     
@@ -163,16 +163,16 @@
   
   &__list-item {
     margin-bottom: 0.75rem;
-    color: #d0d0d0;
+    color: schemes.color(muted-text);
     font-size: 0.9rem;
-    
+
     &:last-child {
       margin-bottom: 0;
     }
   }
-  
+
   &__link {
-    color: #d0d0d0;
+    color: schemes.color(muted-text);
     text-decoration: none;
     font-size: 0.9rem;
     line-height: 1.5;
@@ -200,12 +200,12 @@
   
   // Credit/Copyright section
   &__credit {
-    border-top: 1px solid #333;
+    border-top: 1px solid schemes.color(border-color-subtle);
     padding: 2rem 0;
     text-align: center;
     font-size: 0.875rem;
-    color: #b0b0b0;
-    
+    color: schemes.color(muted-text);
+
     @include mix.tablet-up {
       @include mix.flex-between;
       align-items: center;
@@ -227,7 +227,7 @@
   }
   
   &__legal-link {
-    color: #d0d0d0;
+    color: schemes.color(muted-text);
     text-decoration: none;
     transition: color vars.$transition-base;
     font-size: 0.875rem;
@@ -239,11 +239,11 @@
   
   &__separator {
     margin: 0 0.5rem;
-    color: #666;
+    color: schemes.color(muted-text);
   }
   
   &__credit-link {
-    color: #d0d0d0;
+    color: schemes.color(muted-text);
     text-decoration: none;
     transition: color vars.$transition-base;
     
@@ -268,9 +268,9 @@
     justify-content: center;
     width: 2.5rem;
     height: 2.5rem;
-    background-color: #333;
+    background-color: schemes.color(border-color-subtle);
     border-radius: 50%;
-    color: #d0d0d0;
+    color: schemes.color(muted-text);
     text-decoration: none;
     transition: all vars.$transition-base;
     
@@ -289,7 +289,7 @@
   
   // Variants
   &--light {
-    background-color: #f8f9fa;
+    background-color: schemes.color(medium);
     color: vars.$header-color;
     
     .footer__description,
@@ -302,13 +302,13 @@
     }
     
     .footer__credit {
-      border-top-color: #e9ecef;
-      color: #6c757d;
+      border-top-color: schemes.color(border-color);
+      color: schemes.color(muted-text);
     }
     
     .footer__social-link {
-      background-color: #e9ecef;
-      color: vars.$body-text-color;
+      background-color: schemes.color(border-color);
+      color: schemes.color(body-text-color);
       
       &:hover {
         background-color: schemes.color(primary);

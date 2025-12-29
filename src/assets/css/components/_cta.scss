@@ -4,6 +4,7 @@
 
 @use '../abstracts/variables' as vars;
 @use '../abstracts/mixins' as mix;
+@use '../abstracts/schemes' as schemes;
 
 .cta {
   position: relative;
@@ -18,7 +19,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: #000;
+    background: schemes.color(dark);
     opacity: 0.7;
     z-index: 1;
   }
@@ -46,7 +47,7 @@
     font-weight: 900;
     font-size: min(9vw, 3rem);
     line-height: 1.2;
-    color: #fff;
+    color: schemes.color(body-text-color-white);
     position: relative;
     margin-bottom: 2.25rem;
     text-align: center;
@@ -55,7 +56,7 @@
   &__text {
     font-size: vars.$body-font-size;
     line-height: 1.5em;
-    color: #fff;
+    color: schemes.color(body-text-color-white);
     text-align: center;
     max-width: 46.875rem;
     margin: 0 auto 2rem;
@@ -86,7 +87,7 @@
   
   &--light {
     &::before {
-      background: #fff;
+      background: schemes.color(body-text-color-white);
       opacity: 0.3;
     }
     

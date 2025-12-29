@@ -4,6 +4,7 @@
 
 @use '../abstracts/variables' as vars;
 @use '../abstracts/mixins' as mix;
+@use '../abstracts/schemes' as schemes;
 
 .reviews {
   text-align: center;
@@ -93,7 +94,7 @@
     margin: 0 0 1.25rem;
     padding-bottom: 1.25rem;
     color: vars.$body-text-color;
-    border-bottom: 1px solid #E8E9EC;
+    border-bottom: 1px solid schemes.color(border-color);
   }
   
   &__reviewer {
@@ -109,7 +110,7 @@
   &__role {
     font-size: 0.875rem;
     font-weight: 400;
-    color: #767676;
+    color: schemes.color(muted-text);
     display: block;
   }
   

@@ -4,7 +4,7 @@
 
 @use 'sass:map';
 
-// Complete color schemes with 13 properties each for maximum flexibility
+// Complete color schemes with 15 properties each for maximum flexibility
 $color-schemes: (
   // ARTISAN SCHEME: Current warm golden theme with blue-gray accents
   // Perfect for: Craftspeople, artisans, premium services, warm brands
@@ -21,7 +21,9 @@ $color-schemes: (
     border-color-subtle: rgba(255, 255, 255, 0.2),
     accent: #334756,
     dark: #082032,
-    medium: #f7f7f7
+    medium: #f7f7f7,
+    footer-bg: #082032,
+    muted-text: #9a9a9a
   ),
 
   // MODERN SCHEME: Sleek, tech-inspired, bold contrasts
@@ -39,7 +41,9 @@ $color-schemes: (
     border-color-subtle: rgba(255, 255, 255, 0.2),
     accent: #6C757D,
     dark: #343A40,
-    medium: #495057
+    medium: #495057,
+    footer-bg: #212529,
+    muted-text: #6c757d
   ),
 
   // ELEGANT SCHEME: Sophisticated, refined, professional
@@ -57,7 +61,9 @@ $color-schemes: (
     border-color-subtle: rgba(255, 255, 255, 0.2),
     accent: #6B4423,
     dark: #3C2415,
-    medium: #5A4A3A
+    medium: #5A4A3A,
+    footer-bg: #2c1810,
+    muted-text: #8b7355
   ),
 
   // RUSTIC SCHEME: Earthy, natural, organic feeling
@@ -75,7 +81,9 @@ $color-schemes: (
     border-color-subtle: rgba(255, 255, 255, 0.2),
     accent: #6B8E23,
     dark: #2F4F2F,
-    medium: #556B2F
+    medium: #556B2F,
+    footer-bg: #1a2f1a,
+    muted-text: #6b8e6b
   ),
 
   // VIBRANT SCHEME: Energetic, youthful, creative
@@ -93,7 +101,9 @@ $color-schemes: (
     border-color-subtle: rgba(255, 255, 255, 0.2),
     accent: #3498DB,
     dark: #2C3E50,
-    medium: #34495E
+    medium: #34495E,
+    footer-bg: #1a252f,
+    muted-text: #7f8c8d
   ),
 
   // MINIMALIST SCHEME: Clean, simple, understated
@@ -111,7 +121,9 @@ $color-schemes: (
     border-color-subtle: rgba(255, 255, 255, 0.2),
     accent: #95A5A6,
     dark: #34495E,
-    medium: #7F8C8D
+    medium: #7F8C8D,
+    footer-bg: #2c3e50,
+    muted-text: #95a5a6
   ),
 
   // LUXURY SCHEME: Dark, sophisticated, premium
@@ -129,7 +141,9 @@ $color-schemes: (
     border-color-subtle: rgba(212, 175, 55, 0.3),
     accent: #8B7355,
     dark: #0f0f0f,
-    medium: #2C394B
+    medium: #2C394B,
+    footer-bg: #0f0f0f,
+    muted-text: #999999
   )
 );
 
