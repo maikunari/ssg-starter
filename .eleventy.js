@@ -13,7 +13,7 @@ async function imageShortcode(src, alt, className, loading = 'lazy', sizes = '(m
 
   // create the metadata for an optimised image
   let metadata = await Image(`${src}`, {
-    widths: [300, 600, 1200],
+    widths: [300, 450, 600, 1200],
     formats: ['avif', 'webp', 'jpeg'],
     urlPath: '/images/',
     outputDir: './public/images/',

@@ -37,7 +37,8 @@
     padding: clamp(9em, 25.95vw, 17.5em) 0;
     position: relative;
     
-    &::before {
+    &::before,
+    &::after {
       content: '';
       width: 1px;
       height: 100%;
@@ -50,7 +51,14 @@
       position: absolute;
       display: block;
       top: 0;
+    }
+
+    &::before {
       left: 0;
+    }
+
+    &::after {
+      right: 0;
     }
   }
   

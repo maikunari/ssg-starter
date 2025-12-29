@@ -89,7 +89,7 @@
 
     &__date {
       font-size: calc(14rem / 16);
-      color: rgba(schemes.color(body-text-color), 0.7);
+      color: schemes.color(body-text-color);
     }
 
     &__title {

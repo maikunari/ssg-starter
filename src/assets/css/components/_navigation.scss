@@ -95,18 +95,17 @@
   // Logo
   &__logo {
     display: inline-block;
-    height: 1.875rem;
-    width: auto;
+    width: calc(275rem / 16);
+    height: auto;
     text-decoration: none;
-    
+
     @include mix.desktop-up {
       margin-right: auto;
-      height: 3.75rem;
     }
-    
+
     img {
-      width: auto;
-      height: 100%;
+      width: 100%;
+      height: auto;
     }
     
     .logo--light {
