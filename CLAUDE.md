@@ -361,6 +361,10 @@ output: public/
 4. **Check image optimization output** in `public/images/` after adding images
 5. **Test CMS functionality** for blog-related changes
 
+## Browser Verification
+
+Always verify frontend changes in localhost:8080 after implementation. Check console/network for errors. Auto-fix any issues found before reporting back.
+
 ## Critical Files to Know
 
 - `src/_data/client.json` - Business info (name, contact, hours, services)

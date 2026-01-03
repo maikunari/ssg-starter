@@ -10,7 +10,7 @@ local_backend: true
 # - Set local_backend: false
 # - Configure GitHub OAuth or use Sveltia CMS Authenticator
 # Logo for the CMS interface - update this URL to your deployed site's logo
-logo_url: https://yourdomain.com/assets/images/logo-color.png # Update with your logo URL
+logo_url: /assets/images/logo-color.png
 
 media_folder: "src/assets/images/blog"
 public_folder: "/images/blog"
