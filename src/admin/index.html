@@ -6,19 +6,133 @@
     <title>Sveltia CMS</title>
     <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
     <style>
-      /* Login page - keep the logo */
-      .inner img.logo {
-        content: url("/assets/images/logo-light.png");
-        max-height: 60px !important;
-        width: auto !important;
+      /* ============================================
+         Modern Login Page Styles
+         Premium SaaS-style login experience
+         Only targets login page via #nc--login wrapper
+         ============================================ */
+
+      /* Login background - hero image with dark overlay (matches site headers) */
+      .container.svelte-7ua6x9 {
+        background-image: url('/images/landing-1200w.jpeg') !important;
+        background-size: cover !important;
+        background-position: center !important;
+        background-repeat: no-repeat !important;
+        min-height: 100vh;
+        position: relative;
       }
 
-      /* Login page - colorful gradient background */
-      .container.svelte-7ua6x9,
-      div[class*="container"]:has(.inner img.logo) {
-        background: linear-gradient(135deg, #1a1a2e 0%, #16213e 25%, #0f3460 50%, #533483 75%, #e94560 100%) !important;
-        min-height: 100vh;
+      /* Dark overlay matching site hero/headers (0.7 opacity) */
+      .container.svelte-7ua6x9::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: #082032; /* Artisan theme dark color */
+        opacity: 0.7;
+        z-index: 0;
+        pointer-events: none;
       }
+
+      /* Login page logo */
+      .container.svelte-7ua6x9 img.logo {
+        content: url("/assets/images/logo-light.png");
+        width: calc(275rem / 16) !important; /* Same as header logo */
+        height: auto !important;
+        max-width: 100% !important;
+        filter: drop-shadow(0 4px 20px rgba(255, 255, 255, 0.2));
+      }
+
+      /* Glassmorphism card - login only */
+      .container.svelte-7ua6x9 .inner {
+        background: rgba(255, 255, 255, 0.08) !important;
+        backdrop-filter: blur(20px) !important;
+        -webkit-backdrop-filter: blur(20px) !important;
+        border: 1px solid rgba(255, 255, 255, 0.15) !important;
+        border-radius: 24px !important;
+        padding: 48px 40px !important;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1) !important;
+        animation: cardEntrance 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        opacity: 0;
+        transform: translateY(30px);
+        position: relative;
+        z-index: 1;
+      }
+
+      @keyframes cardEntrance {
+        to { opacity: 1; transform: translateY(0); }
+      }
+
+      /* Hide "Sveltia CMS" heading on login */
+      .container.svelte-7ua6x9 h1 {
+        display: none !important;
+      }
+
+      @keyframes fadeInUp {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+
+      /* Login primary button */
+      .container.svelte-7ua6x9 button[class*="primary"] {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+        border: none !important;
+        border-radius: 12px !important;
+        padding: 14px 28px !important;
+        font-weight: 600 !important;
+        font-size: 0.95rem !important;
+        letter-spacing: 0.02em !important;
+        color: white !important;
+        cursor: pointer !important;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+        box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4) !important;
+        animation: buttonEntrance 0.6s ease 0.5s forwards;
+        opacity: 0;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .container.svelte-7ua6x9 button[class*="primary"]:hover {
+        transform: translateY(-2px) !important;
+        box-shadow: 0 8px 25px rgba(102, 126, 234, 0.5), 0 0 40px rgba(102, 126, 234, 0.3) !important;
+      }
+
+      @keyframes buttonEntrance {
+        to { opacity: 1; }
+      }
+
+      /* Login secondary buttons */
+      .container.svelte-7ua6x9 button:not([class*="primary"]) {
+        background: rgba(255, 255, 255, 0.05) !important;
+        border: 1px solid rgba(255, 255, 255, 0.2) !important;
+        border-radius: 12px !important;
+        padding: 12px 24px !important;
+        color: rgba(255, 255, 255, 0.85) !important;
+        font-weight: 500 !important;
+        transition: all 0.3s ease !important;
+        animation: buttonEntrance 0.6s ease 0.6s forwards;
+        opacity: 0;
+      }
+
+      .container.svelte-7ua6x9 button:not([class*="primary"]):hover {
+        background: rgba(255, 255, 255, 0.12) !important;
+        border-color: rgba(255, 255, 255, 0.35) !important;
+        transform: translateY(-1px) !important;
+      }
+
+      /* Login helper text */
+      .container.svelte-7ua6x9 p {
+        color: rgba(255, 255, 255, 0.6) !important;
+        font-size: 0.9rem !important;
+        animation: fadeInUp 0.6s ease 0.4s forwards;
+        opacity: 0;
+      }
+
+      /* ============================================
+         Admin Page Styles
+         ============================================ */
 
       /* Hide the logo img in admin sidebar - replaced by inline SVG via JS */
       .sui.button.iconic img.logo {
