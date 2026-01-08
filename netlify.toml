@@ -44,10 +44,12 @@
   [headers.values]
     Cache-Control = "public, max-age=0, must-revalidate"
 
-# Admin page headers for auth popup communication
+# Admin page headers - allow same-origin framing for CMS iframe
 [[headers]]
   for = "/admin/*"
   [headers.values]
+    X-Frame-Options = "SAMEORIGIN"
+    Content-Security-Policy = "frame-ancestors 'self'"
     Cross-Origin-Opener-Policy = "same-origin-allow-popups"
     Cross-Origin-Embedder-Policy = "unsafe-none"
 
