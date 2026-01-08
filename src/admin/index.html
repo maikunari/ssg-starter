@@ -199,8 +199,7 @@
     <script>
       (function() {
         // Configuration
-        const AUTH_BASE_URL = 'http://localhost:8787';
-        const SITE_ID = 'hearth-demo';
+        const AUTH_BASE_URL = 'https://sveltia-auth-proxy.mike-371.workers.dev';
         const TOKEN_KEY = 'sveltia-cms.user';
 
         // DOM elements
@@ -281,7 +280,7 @@
         // Redirect to auth server
         function redirectToAuth() {
           const redirectUri = encodeURIComponent(window.location.origin + window.location.pathname);
-          const authUrl = `${AUTH_BASE_URL}/auth?site=${encodeURIComponent(SITE_ID)}&redirect_uri=${redirectUri}`;
+          const authUrl = `${AUTH_BASE_URL}/auth?redirect_uri=${redirectUri}`;
           window.location.href = authUrl;
         }
 
