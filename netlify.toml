@@ -44,6 +44,13 @@
   [headers.values]
     Cache-Control = "public, max-age=0, must-revalidate"
 
+# Admin page headers for auth popup communication
+[[headers]]
+  for = "/admin/*"
+  [headers.values]
+    Cross-Origin-Opener-Policy = "same-origin-allow-popups"
+    Cross-Origin-Embedder-Policy = "unsafe-none"
+
 # Development settings
 [dev]
   command = "npm start"
