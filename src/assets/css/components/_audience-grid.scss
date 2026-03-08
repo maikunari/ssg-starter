@@ -1,0 +1,129 @@
+// =============================================================================
+// AUDIENCE GRID COMPONENT
+// Used on: Homepage (Section 5), Who We Serve parent page (Section 3)
+// Structure: section > container > header + 4×2 card grid (photo + title + text + link)
+// =============================================================================
+
+@use '../abstracts/variables' as vars;
+@use '../abstracts/mixins' as mix;
+@use '../abstracts/schemes' as schemes;
+
+.audience-grid {
+  padding: vars.$section-padding;
+  background: schemes.color(medium);
+
+  &__container {
+    @include mix.container;
+  }
+
+  &__header {
+    text-align: center;
+    margin-bottom: 2.5rem;
+
+    @include mix.tablet-up {
+      margin-bottom: 3rem;
+    }
+  }
+
+  &__title {
+    font-size: vars.$header-font-size;
+    font-weight: 900;
+    line-height: 1.2em;
+    color: schemes.color(header-color);
+    margin-bottom: 0.75rem;
+  }
+
+  &__text {
+    font-size: vars.$body-font-size;
+    line-height: 1.5em;
+    color: schemes.color(body-text-color);
+    max-width: 46.875rem;
+    margin: 0 auto;
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem;
+
+    @include mix.tablet-up {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+
+    @include mix.desktop-up {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  &__card {
+    display: flex;
+    flex-direction: column;
+    background: schemes.color(body-bg-color);
+    border-radius: vars.$border-radius-lg;
+    overflow: hidden;
+    text-decoration: none;
+    box-shadow: vars.$shadow-sm;
+    transition: transform vars.$transition-base, box-shadow vars.$transition-base;
+
+    &:hover {
+      transform: translateY(-0.25rem);
+      box-shadow: vars.$shadow;
+
+      .audience-grid__link {
+        color: schemes.color(primary-dark);
+      }
+    }
+  }
+
+  &__image {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    background: schemes.color(border-color-subtle);
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform vars.$transition-slow;
+    }
+
+    .audience-grid__card:hover & img {
+      transform: scale(1.04);
+    }
+  }
+
+  &__card-body {
+    padding: 1.25rem 1.125rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    gap: 0.375rem;
+  }
+
+  &__card-title {
+    font-size: 1rem;
+    font-weight: 700;
+    line-height: 1.3em;
+    color: schemes.color(header-color);
+    margin: 0;
+  }
+
+  &__card-text {
+    font-size: 0.875rem;
+    line-height: 1.5em;
+    color: schemes.color(body-text-color);
+    margin: 0;
+    flex: 1;
+  }
+
+  &__link {
+    font-size: 0.875rem;
+    font-weight: 700;
+    color: schemes.color(primary);
+    margin-top: 0.5rem;
+    transition: color vars.$transition-base;
+  }
+}

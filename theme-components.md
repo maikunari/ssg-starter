@@ -445,3 +445,294 @@ Scroll-triggered entrance animations are applied globally via `src/assets/js/mai
 | Navigation | `.navigation` | `--scrolled` |
 | Footer | `.footer` | — |
 | Button | `.btn` | `--solid`, `--secondary`, `--hero-solid`, `--hero-transparent`, `--small`, `--large`, `--icon` |
+
+---
+
+## New Components (added 2026-03-08 from CPC build)
+
+---
+
+### 17. `.faq`
+**File:** `components/_faq.scss`
+**Used on:** How We Help sub-pages (modality detail pages)
+**Structure:** Section with title + expandable `<details>/<summary>` pairs
+
+```html
+<section class="faq">
+  <div class="faq__container">
+    <h2 class="faq__title">FAQ</h2>
+    <div class="faq__list">
+      <details class="faq__item">
+        <summary class="faq__question">Is this therapy?</summary>
+        <div class="faq__answer">
+          <p>Answer text here.</p>
+        </div>
+      </details>
+    </div>
+  </div>
+</section>
+```
+
+**Content slots:** `faq__title`, `faq__question`, `faq__answer`
+**Notes:** Uses native HTML `<details>/<summary>` — no JS required.
+
+---
+
+### 18. `.checklist-cards`
+**File:** `components/_checklist-cards.scss`
+**Used on:** Who We Serve sub-pages
+**Structure:** Section with heading + 2×3 grid of icon+title+text cards
+
+```html
+<section class="checklist-cards">
+  <div class="checklist-cards__container">
+    <h2 class="checklist-cards__title">This Work Is For You If...</h2>
+    <div class="checklist-cards__grid">
+      <div class="checklist-cards__item">
+        <span class="checklist-cards__icon">✅</span>
+        <h3 class="checklist-cards__item-title">Card Title</h3>
+        <p class="checklist-cards__item-text">One sentence.</p>
+      </div>
+    </div>
+  </div>
+</section>
+```
+
+**Content slots:** `checklist-cards__title`, `checklist-cards__item-title`, `checklist-cards__item-text`
+
+---
+
+### 19. `.process-steps`
+**File:** `components/_process-steps.scss`
+**Used on:** How We Help sub-pages (session walkthrough)
+**Structure:** Section with title + intro + 2×2 or 1×4 step cards
+
+```html
+<section class="process-steps">
+  <div class="process-steps__container">
+    <h2 class="process-steps__title">What a Session Looks Like</h2>
+    <p class="process-steps__intro">Intro paragraph.</p>
+    <div class="process-steps__grid">
+      <div class="process-steps__item">
+        <h3 class="process-steps__item-title">Step Title</h3>
+        <p class="process-steps__item-text">Step description.</p>
+      </div>
+    </div>
+  </div>
+</section>
+```
+
+**Content slots:** `process-steps__title`, `process-steps__intro`, `process-steps__item-title`, `process-steps__item-text`
+
+---
+
+### 20. `.audience-grid`
+**File:** `components/_audience-grid.scss`
+**Used on:** Home, Who We Serve parent page
+**Structure:** Section with title + intro + responsive card grid, each card links to a sub-page
+
+```html
+<section class="audience-grid">
+  <div class="audience-grid__container">
+    <h2 class="audience-grid__title">Who We Serve</h2>
+    <p class="audience-grid__intro">Intro text.</p>
+    <div class="audience-grid__grid">
+      <div class="audience-grid__card">
+        <img class="audience-grid__image" src="/assets/images/who-we-serve/athletes.jpg" alt="Athletes">
+        <h3 class="audience-grid__card-title">Athletes</h3>
+        <p class="audience-grid__card-text">Short description.</p>
+        <a class="audience-grid__link" href="/who-we-serve/athletes">Learn more</a>
+      </div>
+    </div>
+  </div>
+</section>
+```
+
+---
+
+### 21. `.cert-badges`
+**File:** `components/_cert-badges.scss`
+**Used on:** About page
+**Structure:** Full-width strip of certification logos in a centered horizontal row
+
+```html
+<section class="cert-badges">
+  <div class="cert-badges__container">
+    <div class="cert-badges__grid">
+      <img class="cert-badges__logo" src="/assets/images/logos/cert-bcc.png" alt="Board Certified Coach">
+      <img class="cert-badges__logo" src="/assets/images/logos/cert-heartmath.jpg" alt="HeartMath Certified">
+    </div>
+  </div>
+</section>
+```
+
+---
+
+### 22. `.edu-background`
+**File:** `components/_edu-background.scss`
+**Used on:** About page
+**Structure:** Full-width section with heading, descriptor text, and credential grid
+
+```html
+<section class="edu-background">
+  <div class="edu-background__container">
+    <h2 class="edu-background__title">Educational Background</h2>
+    <p class="edu-background__text">Descriptor text.</p>
+    <div class="edu-background__grid">
+      <div class="edu-background__item">
+        <span class="edu-background__label">Teaching</span>
+      </div>
+    </div>
+  </div>
+</section>
+```
+
+---
+
+### 23. `.lead-magnet`
+**File:** `components/_lead-magnet.scss`
+**Used on:** Home page
+**Structure:** Email opt-in strip with headline, bullet list, and email form
+
+```html
+<section class="lead-magnet">
+  <div class="lead-magnet__container">
+    <h2 class="lead-magnet__title">Download Your Free Report</h2>
+    <ul class="lead-magnet__list">
+      <li>Benefit one</li>
+    </ul>
+    <form class="lead-magnet__form">
+      <input type="email" class="lead-magnet__input" placeholder="Your email">
+      <button type="submit" class="btn btn--solid">Download Now</button>
+    </form>
+  </div>
+</section>
+```
+
+---
+
+### 24. `.blog-preview`
+**File:** `components/_blog-preview.scss`
+**Used on:** Home page
+**Structure:** 3-card blog post preview section with date, title, excerpt, and read-more link
+
+```html
+<section class="blog-preview">
+  <div class="blog-preview__container">
+    <h2 class="blog-preview__title">Insights</h2>
+    <div class="blog-preview__grid">
+      <article class="blog-preview__card">
+        <time class="blog-preview__date">January 23, 2026</time>
+        <h3 class="blog-preview__card-title">Post Title</h3>
+        <p class="blog-preview__excerpt">Excerpt text.</p>
+        <a class="blog-preview__link" href="/blog/slug">Read more</a>
+      </article>
+    </div>
+    <a class="blog-preview__all" href="/blog">More topics</a>
+  </div>
+</section>
+```
+
+---
+
+### 25. `.events-list`
+**File:** `components/_events-list.scss`
+**Used on:** Events page
+**Structure:** Stacked event cards with date, title, type badge, location, time, and CTA
+
+```html
+<section class="events-list">
+  <div class="events-list__container">
+    <div class="events-list__item">
+      <div class="events-list__date">
+        <span class="events-list__day">01</span>
+        <span class="events-list__month">December</span>
+      </div>
+      <div class="events-list__details">
+        <h3 class="events-list__title">Event Title</h3>
+        <span class="events-list__type">Workshop</span>
+        <p class="events-list__location">Location</p>
+        <p class="events-list__time">10:30 - 14:00</p>
+        <a class="btn btn--solid" href="#">Learn more</a>
+      </div>
+    </div>
+  </div>
+</section>
+```
+
+---
+
+### 26. `.products-grid`
+**File:** `components/_products-grid.scss`
+**Used on:** Products & Programs page
+**Structure:** Card grid with product image, title, description, price, and purchase CTA
+
+```html
+<section class="products-grid">
+  <div class="products-grid__container">
+    <div class="products-grid__grid">
+      <div class="products-grid__card">
+        <h3 class="products-grid__title">Product Name</h3>
+        <p class="products-grid__description">Description text.</p>
+        <p class="products-grid__price">$79</p>
+        <a class="btn btn--solid" href="https://stripe.com/..." target="_blank">Order Now</a>
+      </div>
+    </div>
+  </div>
+</section>
+```
+
+---
+
+### 27. `.modality-list`
+**File:** `components/_modality-list.scss`
+**Used on:** How We Help parent page
+**Structure:** Linked modality cards in a 2×2 or 1×4 grid, each linking to the detail page
+
+```html
+<section class="modality-list">
+  <div class="modality-list__container">
+    <div class="modality-list__grid">
+      <a class="modality-list__card" href="/how-we-help/heartmath">
+        <img class="modality-list__image" src="/assets/images/how-we-help/heartmath.jpg" alt="HeartMath">
+        <h3 class="modality-list__title">HeartMath®</h3>
+        <p class="modality-list__tagline">Regulate from the inside out.</p>
+      </a>
+    </div>
+  </div>
+</section>
+```
+
+---
+
+## Updated Component Quick Reference
+
+| Component | Root Class | Key Modifier(s) |
+|---|---|---|
+| Hero | `.hero` | `--parallax`, `--minimal` |
+| Page Banner | `.page-banner` | — |
+| Content Block | `.content-block` | `--reversed`, `--brands` |
+| Services | `.services` | `--overlap` |
+| Reviews | `.reviews` | — |
+| CTA | `.cta` | `--dark`, `--light`, `--no-overlay` |
+| Contact Form | `.contact-form` | — |
+| Contact Info | `.contact-info` | — |
+| Article Card | `.article-card` | `--single` |
+| Gallery | `.gallery` | `--home`, `--masonry` |
+| Blog Layout | `.blog-layout` | — |
+| Sidebar | `.sidebar` | — |
+| Pagination | `.pagination` | — |
+| Navigation | `.navigation` | `--scrolled` |
+| Footer | `.footer` | — |
+| Button | `.btn` | `--solid`, `--secondary`, `--hero-solid`, `--hero-transparent`, `--small`, `--large`, `--icon` |
+| FAQ | `.faq` | — |
+| Checklist Cards | `.checklist-cards` | — |
+| Process Steps | `.process-steps` | — |
+| Audience Grid | `.audience-grid` | — |
+| Cert Badges | `.cert-badges` | — |
+| Edu Background | `.edu-background` | — |
+| Lead Magnet | `.lead-magnet` | — |
+| Blog Preview | `.blog-preview` | — |
+| Events List | `.events-list` | — |
+| Products Grid | `.products-grid` | — |
+| Modality List | `.modality-list` | — |

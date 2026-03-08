@@ -1,446 +1,155 @@
-# CLAUDE.md
+# CLAUDE.md — SSG Starter Build Instructions
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+This file tells you (Claude Code / Gemini / any coding agent) how to build a client site using this theme. Read it before touching any files.
 
-## Project Overview
+---
 
-**SSG-Starter** is an Eleventy-based static site generator template for business websites with:
-- Theme-aware SCSS architecture (7 pre-built themes)
-- Interactive setup wizard for quick configuration
-- GSAP scroll animations with native View Transitions API
-- Sveltia CMS for blog management (modern successor to Decap CMS)
-- Responsive image optimization via @11ty/eleventy-img
-- PhotoSwipe gallery integration with Masonry layouts
+## The Core Rule: Spec First, Build Second
 
-**Tech Stack**: Eleventy 3.x, Sass, PostCSS/Autoprefixer, esbuild, GSAP, View Transitions API, Sveltia CMS
+**Never write HTML for a page until you have both:**
+1. `_specs/[page]-copy.txt` — all the text content, word for word
+2. `_specs/[page]-blueprint.md` — the section-by-section layout plan
 
-## Template Setup
+Build only what the spec says. No improvising components, no inventing class names, no hallucinated content.
 
-**IMPORTANT**: This is a **template repository**. When using SSG-Starter to create a new site:
+---
 
-1. **Use as GitHub Template** (recommended):
-   - Click "Use this template" button on GitHub
-   - Clone your new repository
-   - Run `npm install`
-   - Run `npm run setup` (interactive configuration wizard)
+## The Build Phases
 
-2. **Manual Setup**:
-   - Clone this repository
-   - Run `npm install`
-   - Run `npm run setup` to configure business info, authors, theme, etc.
+### Phase 1: Component Factory
+Before building any pages, write SCSS partials for any new components the blueprints require and import them into `src/assets/css/main.scss`. Refer to `theme-components.md` for the full component vocabulary. If a new component is needed, add it to `theme-components.md` before building.
 
-See [QUICK_START.md](./QUICK_START.md) for complete setup instructions.
+### Phase 2: Homepage Pilot
+Build the homepage first. Verify: correct components used, header/footer not duplicated, all image paths resolve.
 
-### Setup Script Reference
+### Phase 3: Hub Pages
+Build the core navigation pages (About, Contact, Events, Products, section parents).
 
-The `npm run setup` command runs an interactive wizard that configures:
+### Phase 4: Sub-Page Batches
+Build nested pages in batches — they typically share identical layouts, so do them together.
 
-- Business information (name, contact, address, hours, services)
-- Author profiles (names, titles, bios)
-- Theme selection (from 7 pre-built themes)
-- Repository settings (Git URL, branch)
+### Phase 5: Final Audit
+Check all internal links, missing images, CMS config, and unused template pages before handoff.
 
-**Files automatically updated by setup script**:
-- `src/_data/client.json` - Business data
-- `src/_data/authors.json` - Author information
-- `src/assets/css/abstracts/_schemes.scss` - Active theme
-- `src/admin/config.yml` - CMS configuration
-- `package.json` - Repository metadata
+---
 
-**Manual steps after setup**:
-- Add author photos to `src/assets/images/authors/`
-- Add logo files to `src/assets/images/`
-- Update favicons in `src/assets/favicons/`
-- Add social sharing image `src/assets/images/social.jpg`
+## Component Vocabulary
 
-### Template vs. Client Site Workflows
+**Only use class names from `theme-components.md`.** Never invent a class name. If a design element doesn't map to an existing component, add the component to `theme-components.md` first (with HTML structure, modifiers, content slots), then build it.
 
-**Template Development** (this repository):
-- Work on improving the template itself
-- Keep placeholder data in place
-- Test with multiple themes
-- Ensure setup script works correctly
+---
 
-**Client Site Development** (after running setup):
-- Replace all placeholder content with real data
-- Add client-specific assets (images, logos)
-- Customize pages and content
-- Deploy to production
+## Blueprint Rules (Critical)
 
-## Essential Commands
+### Section splits must be explicit
+When a page has multiple content-block sections, the blueprint **must** number each paragraph and specify exactly which paragraphs go in which section. "Several paragraphs of bio" is not enough — agents will put everything in one block.
 
-### Setup
-```bash
-npm run setup            # Run interactive setup wizard to configure site
+**Bad:**
+```
+Section 2: .content-block — Traci's biography (multiple paragraphs)
 ```
 
-### Development
-```bash
-npm start                 # Start dev server with live reload (http://localhost:8080)
-npm run build            # Full production build (clean, compile, optimize, minify)
-npm run clean            # Remove public/ directory
+**Good:**
+```
+Section 2: .content-block (image left, text right)
+- Text: FIRST 3 paragraphs ONLY:
+  1. "As long as I can remember..."
+  2. "Therefore, I was drawn to dance..."
+  3. "I recognize not everyone..."
+
+Section 3: .content-block--reversed ⚠️ SEPARATE SECTION — do not merge with Section 2
+- Text: REMAINING 6 paragraphs:
+  1. "She uses her expertise..."
+  ...
 ```
 
-### Asset Compilation
-```bash
-npm run build:scss       # Compile Sass + Autoprefixer to compressed CSS
-npm run watch:scss       # Watch Sass files for changes
-npm run build:assets     # Bundle JS with esbuild
-npm run watch:js         # Watch JS files and rebuild on change
-npm run postcss          # Run Autoprefixer on compiled CSS
-```
+### Mark merge-risk sections
+Use `⚠️ SEPARATE SECTION` warnings in blueprints wherever two adjacent content-blocks could be accidentally collapsed into one.
 
-### Eleventy Operations
-```bash
-npm run build:eleventy   # Build Eleventy site only
-npm run start:eleventy   # Start Eleventy dev server only
-npm run start:proxy      # Start CMS proxy server for local development
-```
+### Exclude header and footer from blueprints
+Global `header.html` and `footer.html` are injected by the layout. Never include them in page blueprints or page HTML.
 
-## Architecture Overview
+---
 
-### Template System
-The project uses **two layout approaches**:
+## Image Paths
 
-1. **Simple Layout** (most pages): Specify `layout: 'base.html'` in frontmatter
-2. **Template Inheritance** (complex pages): Use `{% extends "_layouts/base.html" %}` with block overrides
+All images live in `src/assets/images/`. Reference them as `/assets/images/filename.jpg` in HTML.
 
-Base layout includes header/footer and provides blocks for: `head`, `body`, `scripts`
+**Subdirectory structure:**
+- `/assets/images/blog/` — blog post images
+- `/assets/images/how-we-help/` — modality images (heartmath.jpg, net.jpg, brainspotting.jpg, cbt.jpg)
+- `/assets/images/who-we-serve/` — audience images (athletes.jpg, dancers.jpg, etc.)
+- `/assets/images/logos/` — cert badges and partner logos
+- `/assets/images/logo-color.png` — full color logo
+- `/assets/images/logo-light.png` — white/transparent logo (for dark backgrounds)
 
-### Theme System Architecture
-The theming system is the **most critical architectural pattern** - all components must follow it:
+---
 
-**Location**: `src/assets/css/abstracts/_schemes.scss`
+## Color Scheme
 
-**7 Available Themes**:
-- `artisan` (default) - Warm golden with blue-gray
-- `modern` - Tech-inspired blue
-- `elegant` - Sophisticated brown
-- `rustic` - Earthy green
-- `vibrant` - Energetic red/blue
-- `minimalist` - Clean neutral
-- `luxury` - Dark premium
+Colors live in `src/assets/css/abstracts/_schemes.scss`. Each project gets its own named scheme.
 
-**Switch themes** by changing `$active-scheme` variable in `_schemes.scss`
+**To set up a new project:**
+1. Add a new scheme entry (copy an existing one as a base)
+2. Update `$active-scheme` to your scheme name
+3. Adjust the ~5 primary color values
 
-**Critical Rule**: Never hardcode colors. Always use:
-```scss
-@use '../abstracts/schemes' as schemes;
+**Never hardcode hex values in component files** — always use scheme variables via the `variables` module.
 
-.component {
-  background-color: schemes.color(medium);
-  color: schemes.color(body-text-color-white);
-  border: 1px solid schemes.color(border-color);
-}
-```
+---
 
-**13 Theme Properties**:
-- `primary`, `primary-shade`, `primary-dark`, `primary-light`
-- `header-color`, `body-text-color`, `body-text-color-white`
-- `body-bg-color`, `border-color`, `border-color-subtle`
-- `accent`, `dark`, `medium`
+## CMS (Sveltia)
 
-### SCSS Architecture (7-1 Pattern)
-```
-src/assets/css/
-├── abstracts/      # Variables, mixins, schemes (theme system)
-├── base/           # Reset, typography, CSS custom properties
-├── components/     # BEM-style components
-├── layout/         # Header, footer, containers
-├── utilities/      # Spacing, animations, view transitions
-├── vendor/         # PhotoSwipe overrides
-└── main.scss       # Main entry point
-```
+- Config lives at `src/admin/config.yml`
+- After cloning to a new client repo, update `repo:` to point to the new repo name
+- Auth: use `maikunari/sveltia-auth-proxy` for Google login (non-technical clients)
 
-### JavaScript Architecture
-**Build System**: `build-assets.js` uses esbuild to bundle JS into `public/assets/js/scripts.min.js`
+---
 
-**Key Files**:
-- `main.js` - GSAP animations, PhotoSwipe init, View Transitions support
-- `gallery.js` - Masonry layout initialization
-- `nav.js` - Mobile navigation toggle (supports View Transitions)
-- `scroll-to-top.js` - Floating scroll-to-top button (appears after 2 viewport heights)
-- `reading-progress.js` - Blog post reading progress indicator (top of page)
+## Netlify
 
-**View Transitions API**:
-- Native browser page transitions (cross-fade, 300ms)
-- Uses `<meta name="view-transition" content="same-origin">` in base layout
-- Scripts reinitialize via `pagereveal` event
-- Respects `prefers-reduced-motion`
-
-**Animation System**:
-Two timing modes for scroll animations:
-- **Standard**: 0.8s duration, 0.15s stagger (content-heavy pages)
-- **Fast**: 0.6s duration, 0.08s stagger (content-light pages)
-
-Usage:
-```html
-<!-- Standard -->
-<div data-animate-group>
-  <div>Item 1</div>
-  <div>Item 2</div>
-</div>
-
-<!-- Fast -->
-<div data-animate-group data-animate-fast>
-  <div>Item 1</div>
-  <div>Item 2</div>
-</div>
-```
-
-### CSS Custom Properties
-Global design tokens in `src/assets/css/base/_reset.scss`:
-```css
-:root {
-  /* Spacing scale */
-  --space-xs: 0.25rem;
-  --space-sm: 0.5rem;
-  --space-md: 1rem;
-  --space-lg: 2rem;
-  --space-xl: 4rem;
-
-  /* Border radius */
-  --radius-sm: 0.25rem;
-  --radius-md: 0.5rem;
-  --radius-lg: 1rem;
-
-  /* Shadows */
-  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
-  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
-  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
-}
-```
-
-### Image Optimization System
-**Shortcode**: `{% image src, alt, className, loading, sizes %}`
-
-**Generated formats**: AVIF, WebP, JPEG at widths [300, 600, 1200]
-
-**Critical Pattern**: The shortcode sets explicit width/height on `<img>` tags. To style images properly:
-```scss
-.image-container {
-  width: calc(120rem / 16);
-  height: calc(120rem / 16);
-
-  img {  // Always target the img element
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-}
-```
-
-**Gallery Shortcode**: `{% gallery images %}` - Generates PhotoSwipe-enabled Masonry grid
-
-**Important - Image Loading with View Transitions**:
-- Gallery/Masonry images must use `loading="eager"` (not `lazy`)
-- Browser lazy loading doesn't re-trigger after View Transitions
-- Example: `{% image src, alt, 'gallery__image', 'eager' %}`
-
-**Blog Image Thumbnail Generation**:
-- Automated script (`build-blog-images.js`) generates thumbnails during build process
-- Source: `src/assets/images/blog/*.{jpg,png,webp}`
-- Output: `public/images/blog/*-thumb.{jpg,png,webp}` (300px width, 85% quality)
-- Runs automatically in `npm run build` pipeline
-- Thumbnails used in: post navigation, article cards, sidebar featured posts
-- Manual run: `npm run build:blog-images`
-
-### Sveltia CMS Integration
-**Access**: `http://localhost:8080/admin` (local development)
-
-**About Sveltia CMS**: Modern, open-source successor to Decap CMS with native drag-and-drop, better UX, and faster performance.
-
-**Configuration**: `src/admin/config.yml`
-- Backend: GitHub (branch: `main`)
-- Media folder: `src/assets/images/blog/`
-- Local backend enabled for development
-- **Note**: Sveltia CMS does not support git-gateway backend (uses GitHub/GitLab/Gitea instead)
-
-**Blog Post Schema**:
-```yaml
-pageName: blog-post-slug          # URL and image filename
-blogTitle: Display Title
-titleTag: SEO Title
-blogDescription: Meta description
-author: Author Name
-date: ISO date (auto-generated)
-tags: [post, optional-tags]       # Must include "post"
-image: /images/blog/image.jpg     # Auto-uploaded
-imageAlt: Image description
-body: Markdown content
-```
-
-**Important**: Images are automatically named based on `pageName` field
-
-**Blog Directory Data** (`src/blog/blog.json`):
-```json
-{
-  "layout": "blog-post.html",
-  "tags": "post"
-}
-```
-This **critical file** applies default layout and tags to ALL blog posts. Without it, blog posts won't render with proper layout.
-
-### Eleventy Configuration (.eleventy.js)
-**Key Features**:
-- Navigation plugin: `@11ty/eleventy-navigation`
-- Image shortcode: `{% image ... %}`
-- Gallery shortcode: `{% gallery ... %}`
-- Date filters: `postDate` (human-readable), `date` (ISO format for sitemap)
-- Critical CSS extraction (production only)
-- HTML minification (production only)
-
-**Directory Structure**:
-```
-input: src/
-includes: _includes/
-layouts: _layouts/
-output: public/
-```
-
-### Build Pipeline
-
-**Production Build** (`npm run build`):
-1. Clean public/ directory
-2. Compile SCSS → CSS (compressed)
-3. Autoprefixer adds vendor prefixes
-4. Eleventy generates HTML
-5. Critical CSS inlined in `<head>`
-6. HTML minified
-7. esbuild bundles/minifies JS
-
-**Browser Support** (via browserslist):
-- Last 2 years of browser versions
-- \> 0.5% global usage
-- No dead browsers
-
-## Component Development Guidelines
-
-### When Creating/Editing SCSS Components:
-
-1. **Always import schemes**:
-```scss
-@use '../abstracts/schemes' as schemes;
-@use '../abstracts/variables' as vars;
-@use '../abstracts/mixins' as mix;
-```
-
-2. **Use BEM methodology**:
-```scss
-.component {
-  &__element { }
-  &--modifier { }
-}
-```
-
-3. **Never hardcode colors** - use `schemes.color()` for everything
-4. **Test with multiple themes** - switch `$active-scheme` and verify
-5. **Use global variables** from `_variables.scss` for spacing, typography, breakpoints
-6. **Use CSS custom properties** for runtime-configurable values
-
-### When Adding JavaScript Functionality:
-
-1. **Add to build-assets.js** if creating a new JS file
-2. **For page-specific code**, initialize in `DOMContentLoaded` and `pagereveal` events
-3. **Gallery/PhotoSwipe code** must be re-initialized after View Transitions
-4. **Clean up GSAP ScrollTriggers** before re-initializing: `ScrollTrigger.getAll().forEach(trigger => trigger.kill())`
-5. **Expose init functions** on `window` for View Transitions re-initialization
-
-### When Adding Pages:
-
-1. **Simple pages**: Use `layout: 'base.html'` in frontmatter
-2. **Complex pages**: Use `{% extends "_layouts/base.html" %}` with block overrides
-3. **Add navigation**: Use `eleventyNavigation` plugin syntax in frontmatter
-4. **Choose animation speed**: Add `data-animate-group` or `data-animate-group data-animate-fast`
-
-## Development Workflow Best Practices
-
-1. **Always run full build before commits**: `npm run build`
-2. **Test responsive behavior** across breakpoints (tablet: 48em, desktop: 64em)
-3. **Verify View Transitions work** when adding new interactive elements
-4. **Check image optimization output** in `public/images/` after adding images
-5. **Test CMS functionality** for blog-related changes
-
-## Browser Verification
-
-Always verify frontend changes in localhost:8080 after implementation. Check console/network for errors. Auto-fix any issues found before reporting back.
-
-## Critical Files to Know
-
-- `src/_data/client.json` - Business info (name, contact, hours, services)
-- `src/assets/css/abstracts/_schemes.scss` - Theme definitions and active theme
-- `src/assets/css/abstracts/_variables.scss` - Global spacing, typography, breakpoints
-- `src/assets/css/base/_reset.scss` - CSS custom properties, font definitions
-- `.eleventy.js` - Eleventy configuration and shortcodes
-- `build-assets.js` - JavaScript bundling configuration
-- `build-blog-images.js` - Blog image thumbnail generation script
-- `src/assets/js/main.js` - GSAP animations and View Transitions support
-- `netlify.toml` - Netlify deployment config, cache headers, security headers
-- `postcss.config.js` - Autoprefixer configuration
-
-## Common Pitfalls to Avoid
-
-1. **Hardcoding colors** instead of using `schemes.color()`
-2. **Styling `<picture>` elements** instead of the nested `<img>` tag
-3. **Forgetting to re-initialize scripts** after View Transitions (use `pagereveal` event)
-4. **Not killing ScrollTriggers** before creating new ones (causes duplicates)
-5. **Missing "post" tag** in blog post frontmatter (posts won't appear in collections)
-6. **Branch mismatch** in CMS config (must match current Git branch)
-7. **Using `loading="lazy"` on gallery images** - breaks with View Transitions, use `eager` instead
-
-## Deployment Notes
-
-**Pre-deployment checklist**:
-1. Update `src/_data/client.json` with actual client information
-2. Set desired theme in `_schemes.scss`
-3. Test all pages with chosen theme
-4. Update CMS logo URL in `src/admin/config.yml`
-5. Change CMS backend branch to `main` for production
-6. Set `local_backend: false` in CMS config
-7. Run `npm run build` and verify output
-
-**Netlify deployment** (configured in `netlify.toml`):
+`netlify.toml` is pre-configured with:
 - Build command: `npm run build`
-- Publish directory: `public`
-- Node version: 20
-- Cache headers: 1 year for static assets, revalidate for HTML
-- Security headers: X-Frame-Options, X-XSS-Protection, etc.
-- Enable Netlify Identity for CMS access
-- Enable Git Gateway for CMS functionality
+- Publish dir: `public`
+- Security headers
+- Cache headers
+- Admin iframe headers for CMS
 
-**Generated files**:
-- `/sitemap.xml` - Auto-generated from all pages
+**After connecting to a new repo:** verify the publish dir is `public` not `_site`.
 
-## Google Analytics Setup
+---
 
-The template includes Google Analytics 4 (GA4) support with delayed loading to maintain perfect PageSpeed scores.
+## SEO Redirects
 
-**To enable GA4 tracking:**
+If migrating from an existing site (Squarespace, WordPress, old SSG), create `src/_redirects` before launch. Map old URLs to new URLs using Netlify redirect format:
 
-1. Get your GA4 Measurement ID from Google Analytics (format: `G-XXXXXXXXXX`)
-2. Add it to `src/_data/client.json`:
-   ```json
-   "googleAnalyticsId": "G-XXXXXXXXXX"
-   ```
-3. Rebuild and deploy
+```
+/old-page   /new-page   301
+/blog/:year/:month/:day/:slug   /blog/:slug   301
+```
 
-**Performance Impact:**
-- Delayed loading approach maintains 100/100 PageSpeed scores
-- Script loads after page is fully interactive
-- Minimal tracking delay (~200-500ms)
-- All user interactions are still captured
+---
 
-**Testing:**
-- Analytics won't track on localhost by default
-- Use Google Tag Assistant Chrome extension to verify tracking on deployed site
-- Check Real-Time reports in GA4 to confirm data collection
+## Common Pitfalls
 
-**How it works:**
-- GA4 script only loads if `googleAnalyticsId` is configured in `client.json`
-- Script injection happens after the `load` event to avoid blocking page rendering
-- No impact on Lighthouse performance scores
-- Leave `googleAnalyticsId` empty (`""`) to disable tracking entirely
+| Problem | Fix |
+|---|---|
+| Agent collapses multiple content-blocks into one | Number paragraphs explicitly in blueprint, add ⚠️ SEPARATE SECTION warnings |
+| Wrong image showing | Check path — `src/` for dev, `public/` after build. Use `/assets/images/` prefix |
+| CMS not loading | Check `src/admin/config.yml` — repo field must match current repo |
+| Netlify deploying empty site | Check `netlify.toml` publish dir = `public` |
+| Blog post images not showing | Run `npm run build` — blog images are processed by sharp during build |
+| Localhost port conflict | `lsof -ti:8080 | xargs kill -9` then `npm start` |
+| Push rejected | `git pull --rebase && git push` |
 
-## Form Processing
+---
 
-Basic Netlify form handling is configured. For advanced features (lead scoring, automated follow-ups, seasonal intelligence), see `CUSTOM_API_FORM_PROCESSING.md` for serverless function implementation options.
+## Lessons Learned (from CPC build, March 2026)
+
+- The spec-first system works — invest time in `_specs/` before writing a single line of HTML
+- Draftium (or any wireframe tool) = layout reference only. Colors come from the logo, not the wireframe.
+- FAQ content on detail pages can be rich — don't assume it's placeholder. Read the wireframe source.
+- Agents given vague section descriptions will compress content. Be explicit.
+- Blog images need sharp installed: `npm install sharp --save-dev`
+- The `baseline-browser-mapping` PostCSS warning is harmless — ignore or update the package
+- Node MaxListeners warning during build is harmless — Eleventy + plugins registering cleanup handlers

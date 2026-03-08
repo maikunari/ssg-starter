@@ -1,0 +1,130 @@
+// =============================================================================
+// PRODUCTS GRID COMPONENT
+// Used on: Products & Programs page
+// Structure: section > container > 3-col card grid
+// Each card: image + title + description + price + Stripe CTA button
+// =============================================================================
+
+@use '../abstracts/variables' as vars;
+@use '../abstracts/mixins' as mix;
+@use '../abstracts/schemes' as schemes;
+
+.products-grid {
+  padding: vars.$section-padding;
+  background: schemes.color(body-bg-color);
+
+  &__container {
+    @include mix.container;
+  }
+
+  &__header {
+    text-align: center;
+    margin-bottom: 2.5rem;
+
+    @include mix.tablet-up {
+      margin-bottom: 3rem;
+    }
+  }
+
+  &__section-title {
+    font-size: vars.$header-font-size;
+    font-weight: 900;
+    line-height: 1.2em;
+    color: schemes.color(header-color);
+    margin-bottom: 0.75rem;
+  }
+
+  &__section-text {
+    font-size: vars.$body-font-size;
+    line-height: 1.5em;
+    color: schemes.color(body-text-color);
+    max-width: 46.875rem;
+    margin: 0 auto;
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+
+    @include mix.tablet-up {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @include mix.desktop-up {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  &__card {
+    display: flex;
+    flex-direction: column;
+    background: schemes.color(body-bg-color);
+    border: 1px solid schemes.color(border-color);
+    border-radius: vars.$border-radius-lg;
+    overflow: hidden;
+    box-shadow: vars.$shadow-sm;
+    transition: transform vars.$transition-base, box-shadow vars.$transition-base;
+
+    &:hover {
+      transform: translateY(-0.25rem);
+      box-shadow: vars.$shadow;
+    }
+  }
+
+  &__image {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    background: schemes.color(medium);
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    padding: 1.5rem;
+    gap: 0.5rem;
+  }
+
+  &__title {
+    font-size: 1.125rem;
+    font-weight: 700;
+    line-height: 1.3em;
+    color: schemes.color(header-color);
+    margin: 0;
+  }
+
+  &__text {
+    font-size: 0.9375rem;
+    line-height: 1.55em;
+    color: schemes.color(body-text-color);
+    margin: 0;
+    flex: 1;
+  }
+
+  &__price {
+    font-size: 1.5rem;
+    font-weight: 900;
+    color: schemes.color(primary);
+    margin: 0.5rem 0 0;
+  }
+
+  &__button {
+    margin-top: 0.75rem;
+    text-align: center;
+
+    // Make the btn fill the card width
+    .btn {
+      width: 100%;
+      justify-content: center;
+    }
+  }
+}

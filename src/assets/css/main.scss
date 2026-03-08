@@ -46,6 +46,18 @@
 
 // 5. Utilities
 // -----------------------------------------------------------------------------
+// New components (added from CPC build, 2026-03-08)
+@use 'components/audience-grid';
+@use 'components/blog-preview';
+@use 'components/cert-badges';
+@use 'components/checklist-cards';
+@use 'components/edu-background';
+@use 'components/events-list';
+@use 'components/faq';
+@use 'components/lead-magnet';
+@use 'components/modality-list';
+@use 'components/process-steps';
+@use 'components/products-grid';
 @use 'utilities/spacing';
 @use 'utilities/transitions';
 @use 'utilities/animations'; 

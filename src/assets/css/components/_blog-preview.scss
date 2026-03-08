@@ -1,0 +1,55 @@
+// =============================================================================
+// BLOG PREVIEW COMPONENT
+// Used on: Homepage (Section 9 — "Insights")
+// Structure: thin wrapper section with centered title + 3-col article-card grid + "More topics" link
+// Note: cards inside use the existing .article-card component
+// =============================================================================
+
+@use '../abstracts/variables' as vars;
+@use '../abstracts/mixins' as mix;
+@use '../abstracts/schemes' as schemes;
+
+.blog-preview {
+  padding: vars.$section-padding;
+  background: schemes.color(body-bg-color);
+
+  &__container {
+    @include mix.container;
+  }
+
+  &__title {
+    font-size: vars.$header-font-size;
+    font-weight: 900;
+    line-height: 1.2em;
+    color: schemes.color(header-color);
+    text-align: center;
+    margin-bottom: 2.5rem;
+
+    @include mix.tablet-up {
+      margin-bottom: 3rem;
+    }
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+
+    @include mix.tablet-up {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @include mix.desktop-up {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  &__more {
+    text-align: center;
+    margin-top: 2.5rem;
+
+    @include mix.tablet-up {
+      margin-top: 3rem;
+    }
+  }
+}

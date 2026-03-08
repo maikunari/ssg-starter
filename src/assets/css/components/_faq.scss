@@ -1,0 +1,96 @@
+// =============================================================================
+// FAQ COMPONENT
+// Used on: How We Help sub-pages (heartmath, brainspotting, net, cbt)
+// Structure: section > container > title + list of details/summary pairs
+// =============================================================================
+
+@use '../abstracts/variables' as vars;
+@use '../abstracts/mixins' as mix;
+@use '../abstracts/schemes' as schemes;
+
+.faq {
+  padding: vars.$section-padding;
+  background: schemes.color(body-bg-color);
+
+  &__container {
+    @include mix.container(52rem); // narrower — accordion reads better constrained
+  }
+
+  &__title {
+    font-size: vars.$header-font-size;
+    font-weight: 900;
+    line-height: 1.2em;
+    color: schemes.color(header-color);
+    text-align: center;
+    margin-bottom: 2.5rem;
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: 0; // items share borders
+  }
+
+  &__item {
+    border-top: 1px solid schemes.color(border-color);
+
+    &:last-child {
+      border-bottom: 1px solid schemes.color(border-color);
+    }
+
+    // Remove default disclosure triangle
+    &[open] > .faq__question::after {
+      transform: rotate(180deg);
+    }
+  }
+
+  &__question {
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.25rem 0;
+    font-size: 1.0625rem;
+    font-weight: 700;
+    color: schemes.color(header-color);
+    cursor: pointer;
+    user-select: none;
+    transition: color vars.$transition-base;
+
+    // Remove default marker in all browsers
+    &::-webkit-details-marker { display: none; }
+    &::marker { display: none; }
+
+    // Chevron icon via pseudo-element
+    &::after {
+      content: '';
+      flex-shrink: 0;
+      width: 1.25rem;
+      height: 1.25rem;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%236CB33F' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-size: contain;
+      transition: transform vars.$transition-base;
+    }
+
+    &:hover {
+      color: schemes.color(primary);
+    }
+  }
+
+  &__answer {
+    padding-bottom: 1.25rem;
+
+    p {
+      font-size: vars.$body-font-size;
+      line-height: 1.6em;
+      color: schemes.color(body-text-color);
+      margin: 0;
+
+      & + p {
+        margin-top: 0.75rem;
+      }
+    }
+  }
+}

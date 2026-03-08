@@ -1,0 +1,65 @@
+// =============================================================================
+// CERT BADGES COMPONENT
+// Used on: Homepage (Section 2), About page
+// Structure: full-width light strip with a horizontal row of certification badge images
+// No text — purely visual trust indicators
+// =============================================================================
+
+@use '../abstracts/variables' as vars;
+@use '../abstracts/mixins' as mix;
+@use '../abstracts/schemes' as schemes;
+
+.cert-badges {
+  padding: 2.5rem 0;
+  background: schemes.color(medium);
+  border-top: 1px solid schemes.color(border-color-subtle);
+  border-bottom: 1px solid schemes.color(border-color-subtle);
+  overflow: hidden;
+
+  // Marquee track — two sets of logos side by side for infinite scroll
+  &__track {
+    display: flex;
+    align-items: center;
+    gap: 4rem;
+    width: max-content;
+    animation: cert-marquee 28s linear infinite;
+
+    &:hover {
+      animation-play-state: paused;
+    }
+  }
+
+  // One set of badges (duplicated in HTML for seamless loop)
+  &__set {
+    display: flex;
+    align-items: center;
+    gap: 4rem;
+    flex-shrink: 0;
+  }
+
+  &__item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+
+    img {
+      max-height: 5.5rem;
+      max-width: 12rem;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+      filter: grayscale(20%) opacity(0.85);
+      transition: filter vars.$transition-base;
+
+      &:hover {
+        filter: grayscale(0%) opacity(1);
+      }
+    }
+  }
+}
+
+@keyframes cert-marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}

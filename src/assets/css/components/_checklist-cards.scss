@@ -1,0 +1,83 @@
+// =============================================================================
+// CHECKLIST CARDS COMPONENT
+// Used on: Who We Serve sub-pages ("This Work Is For You If..." section)
+// Structure: section > container > title + 2×3 or 3×2 card grid
+// =============================================================================
+
+@use '../abstracts/variables' as vars;
+@use '../abstracts/mixins' as mix;
+@use '../abstracts/schemes' as schemes;
+
+.checklist-cards {
+  padding: vars.$section-padding;
+  background: schemes.color(medium);
+
+  &__container {
+    @include mix.container;
+  }
+
+  &__title {
+    font-size: vars.$header-font-size;
+    font-weight: 900;
+    line-height: 1.2em;
+    color: schemes.color(header-color);
+    text-align: center;
+    margin-bottom: 2.5rem;
+
+    @include mix.tablet-up {
+      margin-bottom: 3rem;
+    }
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+
+    @include mix.tablet-up {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+    }
+
+    @include mix.desktop-up {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  &__item {
+    background: schemes.color(body-bg-color);
+    border-radius: vars.$border-radius-lg;
+    padding: 1.75rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    box-shadow: vars.$shadow-sm;
+    transition: transform vars.$transition-base, box-shadow vars.$transition-base;
+
+    &:hover {
+      transform: translateY(-0.1875rem);
+      box-shadow: vars.$shadow;
+    }
+  }
+
+  &__icon {
+    font-size: 1.5rem;
+    line-height: 1;
+    margin-bottom: 0.25rem;
+  }
+
+  &__item-title {
+    font-size: 1.0625rem;
+    font-weight: 700;
+    line-height: 1.3em;
+    color: schemes.color(header-color);
+    margin: 0;
+  }
+
+  &__item-text {
+    font-size: 0.9375rem;
+    line-height: 1.5em;
+    color: schemes.color(body-text-color);
+    margin: 0;
+  }
+}
