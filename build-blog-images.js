@@ -49,6 +49,10 @@ async function generateThumbnail(sourceFile) {
   const sourcePath = path.join(SOURCE_DIR, sourceFile);
   const outputPath = path.join(OUTPUT_DIR, `${basename}-thumb${ext}`);
 
+  if (isUpToDate(sourcePath, outputPath)) {
+    return 'skip';
+  }
+
   try {
     // Generate thumbnail
     await sharp(sourcePath)
@@ -70,11 +74,25 @@ async function generateThumbnail(sourceFile) {
 }
 
 /**
+ * Check if output is up to date (source not newer than output)
+ */
+function isUpToDate(sourcePath, outputPath) {
+  if (!fs.existsSync(outputPath)) return false;
+  const srcMtime = fs.statSync(sourcePath).mtimeMs;
+  const outMtime = fs.statSync(outputPath).mtimeMs;
+  return outMtime >= srcMtime;
+}
+
+/**
  * Copy original image to public directory
  */
 async function copyOriginal(sourceFile) {
   const sourcePath = path.join(SOURCE_DIR, sourceFile);
   const outputPath = path.join(OUTPUT_DIR, sourceFile);
+
+  if (isUpToDate(sourcePath, outputPath)) {
+    return 'skip';
+  }
 
   try {
     // Copy file
@@ -114,30 +132,33 @@ async function processAllImages() {
   console.log(`Found ${imageFiles.length} image(s) to process\n`);
 
   let successCount = 0;
+  let skipCount = 0;
   let errorCount = 0;
 
   // Process each image
   for (const file of imageFiles) {
-    console.log(`Processing: ${file}`);
-
     // Copy original
-    const copySuccess = await copyOriginal(file);
-
+    const copyResult = await copyOriginal(file);
     // Generate thumbnail
-    const thumbSuccess = await generateThumbnail(file);
+    const thumbResult = await generateThumbnail(file);
 
-    if (copySuccess && thumbSuccess) {
+    if (copyResult === 'skip' && thumbResult === 'skip') {
+      skipCount++;
+    } else if (copyResult !== false && thumbResult !== false) {
       successCount++;
+      console.log('');
     } else {
       errorCount++;
+      console.log('');
     }
-
-    console.log('');
   }
 
   // Summary
   console.log('─'.repeat(50));
   console.log(`✅ Successfully processed: ${successCount} image(s)`);
+  if (skipCount > 0) {
+    console.log(`⏭️  Skipped (up to date): ${skipCount} image(s)`);
+  }
   if (errorCount > 0) {
     console.log(`❌ Errors: ${errorCount}`);
   }
