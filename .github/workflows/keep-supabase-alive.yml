@@ -20,7 +20,7 @@ jobs:
           fi
           
           STATUS=$(curl -s -o /dev/null -w "%{http_code}" \
-            "${{ secrets.SUPABASE_URL }}/rest/v1/" \
+            "${{ secrets.SUPABASE_URL }}/rest/v1/sites?limit=1" \
             -H "apikey: ${{ secrets.SUPABASE_ANON_KEY }}")
           echo "Supabase ping status: $STATUS"
           if [ "$STATUS" != "200" ]; then
